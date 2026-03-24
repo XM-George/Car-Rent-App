@@ -4,6 +4,8 @@ out/
 !**/src/test/**/out/
 .kotlin
 car_rent_data.bin
+.idea/
+*.iml
 
 ### Eclipse ###
 .apt_generated

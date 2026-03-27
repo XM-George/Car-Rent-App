@@ -135,8 +135,10 @@ public class ManageData
     public static void readCSV(String filePath, String use) {
         String line;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath)))
+        try (InputStream is = ManageData.class.getClassLoader().getResourceAsStream(filePath);
+             BufferedReader br = new BufferedReader(new InputStreamReader(is)))
         {
+
             br.readLine();
             //noinspection IfCanBeSwitch
             if(use.equals("Όχημα"))

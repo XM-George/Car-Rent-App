@@ -664,10 +664,6 @@ public class BaseDialogUI {
                             dialogText = "Επεξεργασία Πελάτη";
                             labelText = "Επιτυχής Επεξεργασία";
                             break;
-                        case ("History"):
-                            dialogText = "base dialog checkerUI";
-                            labelText = "base dialog checkerUI";
-                            break;
                     }
                     break;
                 case ("Όχημα"):
@@ -680,10 +676,6 @@ public class BaseDialogUI {
                         case ("Edit"):
                             dialogText = "Επεξεργασία Οχήματος";
                             labelText = "Επιτυχής Επεξεργασία";
-                            break;
-                        case ("History"):
-                            dialogText = "base dialog checkerUI";
-                            labelText = "base dialog checkerUI";
                             break;
                     }
                     break;

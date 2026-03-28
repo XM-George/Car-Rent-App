@@ -231,15 +231,15 @@ public class BaseDialogUI {
 
             dialog.add(label);
             int k=j+30;
-            if(types[i].equals("Password"))
+            if(types[i].equals(I18n.getString("password")))
             {
                 passField = createPasswordField(50, k, 300, 35);
                 textFields[i] = passField;
                 dialog.add(passField);
             }
-            else if(types[i].equals("Κατάσταση"))
+            else if(types[i].equals(I18n.getString("status")))
             {
-                String[] a={"Διαθέσιμο", "Ενοικιασμένο"};
+                String[] a={I18n.getString("vehicle.status.available") , I18n.getString("vehicle.status.rented")};
                 JComboBox<String> comboBox = createComboBox(a, 50, k,300,35);
                 if(use.equals("Add"))
                 {
@@ -271,7 +271,7 @@ public class BaseDialogUI {
             {
                 for(int i=0;i<times;i++)
                 {
-                    if(!types[i].equals("Κατάσταση"))
+                    if(!types[i].equals(I18n.getString("status")))
                     {
                         returnValues[i] = textFields[i].getText();
                     }
@@ -387,19 +387,19 @@ public class BaseDialogUI {
         switch(entity)
         {
             case ("user"):
-                columnNames = new String[]{"Όνομα", "Επίθετο", "Username", "Email"};
+                columnNames = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username")};
                 dialogText = I18n.getString("user.found");
                 break;
             case ("customer"):
-                columnNames = new String[]{"Όνομα", "Επίθετο", "Τηλέφωνο", "Email", "ΑΦΜ"};
+                columnNames = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("phone") , I18n.getString("email") , I18n.getString("id")};
                 dialogText = I18n.getString("customer.found");
                 break;
             case ("vehicle"):
-                columnNames = new String[]{"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
+                columnNames = new String[]{I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") ,I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
                 dialogText = I18n.getString("vehicle.found");
                 break;
             case ("history"):
-                columnNames = new String[]{"ID Ενοικίασης", "Χρήστης", "ΑΦΜ Πελάτη","ID Οχήματος", "Πινακίδα Οχήματος", "Ημερομηνία Ενοικίασης","Ημερομηνία Επιστροφής", "Κατάσταση"};
+                columnNames = new String[]{I18n.getString("rent.ID") , I18n.getString("user.title.caps") , I18n.getString("customer.ID"),I18n.getString("vehicle.ID"),I18n.getString("vehicle.numberPlate"), I18n.getString("rent.date.rent") , I18n.getString("rent.date.return") , I18n.getString("status")};
                 dialogText = I18n.getString("rent.found");
                 break;
         }

@@ -20,11 +20,12 @@ public class VehicleDialogUI extends BaseDialogUI {
     String typeOf = "vehicle";
     String filename = "/icons/carUI.png";
     EntitySearch search = new EntitySearch();
+    private static final int STATUS_INDEX = 7;
 
     public void AddVehicle() {
 
         String[] result = UIConstructor(I18n.getString("vehicle.add"), typeOf, vehicleOptions, "Add", filename);
-        if (!result[vehicleOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[vehicleOptions.length])) {
             int check = VehicleHelp.checkVehicleDetails(result, null);
             if (check == -1) {
                 new Vehicle(result);
@@ -35,7 +36,7 @@ public class VehicleDialogUI extends BaseDialogUI {
 
     public void EditVehicleDetails() {
         String[] result = UIConstructor(I18n.getString("vehicle.edit.info"), typeOf, vehicleOptions, "Find", filename);
-        if (!result[vehicleOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[vehicleOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             int selection;
             if (s < 0) {
@@ -55,7 +56,7 @@ public class VehicleDialogUI extends BaseDialogUI {
 
     public void SearchVehicle() {
         String[] result = UIConstructor(I18n.getString("vehicle.search"), typeOf, vehicleOptions, "Find", filename);
-        if (!result[vehicleOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[vehicleOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             if (s < 0) {
                 entityNotFound(400, 200, typeOf, s);
@@ -68,7 +69,7 @@ public class VehicleDialogUI extends BaseDialogUI {
 
     public void SeeVehicleHistory() {
         String[] result = UIConstructor(I18n.getString("vehicle.history.see"), typeOf, vehicleOptions, "Find", filename);
-        if (!result[vehicleOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[vehicleOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             int selection;
             if (s < 0) {
@@ -98,7 +99,7 @@ public class VehicleDialogUI extends BaseDialogUI {
     protected void EditVehicleDialog(Vehicle v) {
         String[] fields = {v.getId(), v.getPlate(), v.getBrand(), v.getType(), v.getModel(), v.getYearOfProduction(), v.getColor(), v.getState()};
         String[] result = EditVehicleUIConstructor(I18n.getString("vehicle.edit.info"), vehicleOptions, filename, fields);
-        if (!result[vehicleOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[vehicleOptions.length])) {
             Vehicle.getIDs().remove(v.getId());
             Vehicle.getNPs().remove(v.getPlate());
             int check = VehicleHelp.checkVehicleDetails(result, v);
@@ -135,7 +136,7 @@ public class VehicleDialogUI extends BaseDialogUI {
 
             int k = j + 30;
 
-            if (types[i].equals(I18n.getString("status"))) {
+            if (i == STATUS_INDEX) {
                 String[] a = {I18n.getString("vehicle.status.available") , I18n.getString("vehicle.status.rented")};
                 JComboBox<String> comboBox = createComboBox(a, 50, k, 300, 40);
                 comboBox.setSelectedItem(fields[i]);
@@ -157,7 +158,7 @@ public class VehicleDialogUI extends BaseDialogUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < times; i++) {
-                    if (!types[i].equals(I18n.getString("status"))) {
+                    if (i != STATUS_INDEX) {
                         returnValues[i] = textFields[i].getText();
                     } else {
                         returnValues[i] = (String) comboBoxes[i].getSelectedItem();

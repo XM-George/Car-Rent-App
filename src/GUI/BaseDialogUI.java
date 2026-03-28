@@ -303,6 +303,7 @@ public class BaseDialogUI {
             public void windowClosing(WindowEvent e) {
                 Arrays.fill(returnValues, null);
                 returnValues[times] = "Cancel";
+                dialog.dispose();
             }
         });
 
@@ -344,14 +345,14 @@ public class BaseDialogUI {
             filename = "/icons/errorNotFound.png";
             entityNotFoundDialog = createDialog(dialogText, width, height);
             label = createLabel(labelText, 70,40, 260, 40);
-            addIconToLabel(label, filename);
+            label = addIconToLabel(label, filename);
         }
         else if(use == -2)
         {
             filename = "/icons/warningEmptySearch.png";
             entityNotFoundDialog = createDialog(I18n.getString("parameters.notFound"), width, height);
             label = createLabel(I18n.getString("parameters.enterParameters"), 20,40, 360, 40);
-            addIconToLabel(label, filename);
+            label = addIconToLabel(label, filename);
         }
 
 

@@ -21,7 +21,7 @@ public class CustomerDialogUI extends BaseDialogUI {
 
     public void AddCustomer() {
         String[] result = UIConstructor(I18n.getString("customer.add"), typeOf, customerOptions, "Add", filename);
-        if (!result[customerOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[customerOptions.length])) {
             int check = CustomerHelp.checkCustomerDetails(result);
             if (check == -1) {
                 new Customer(result);
@@ -32,7 +32,7 @@ public class CustomerDialogUI extends BaseDialogUI {
 
     public void EditCustomerDetails() {
         String[] result = UIConstructor(I18n.getString("customer.edit.info"), typeOf, customerOptions, "Find", filename);
-        if (!result[customerOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[customerOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             int selection;
             if (s < 0) {
@@ -53,7 +53,7 @@ public class CustomerDialogUI extends BaseDialogUI {
 
     public void SearchCustomer() {
         String[] result = UIConstructor(I18n.getString("customer.search"), typeOf, customerOptions, "Find", filename);
-        if (!result[customerOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[customerOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             if (s < 0) {
                 entityNotFound(400, 200, typeOf, s);
@@ -66,7 +66,7 @@ public class CustomerDialogUI extends BaseDialogUI {
 
     public void SeeCustomerHistory() {
         String[] result = UIConstructor(I18n.getString("customer.history.see"), typeOf, customerOptions, "Find", filename);
-        if (!result[customerOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[customerOptions.length])) {
             int s = search.searchEntity(result, typeOf);
             int selection;
             if (s < 0) {
@@ -96,7 +96,7 @@ public class CustomerDialogUI extends BaseDialogUI {
     protected void EditCustomerDialog(Customer c) {
         String[] fields = {c.getName(), c.getSurname(), c.getPhone(), c.getEmail(), c.getAfm()};
         String[] result = EditCustomerUIConstructor(I18n.getString("customer.edit.info"), customerOptions, filename, fields);
-        if (!result[customerOptions.length].equals("Cancel")) {
+        if (!"Cancel".equals(result[customerOptions.length])) {
             Customer.getCustomerAfm().remove(c.getAfm());
             int check = CustomerHelp.checkCustomerDetails(result);
             if (check == -1) {
@@ -167,6 +167,7 @@ public class CustomerDialogUI extends BaseDialogUI {
             public void windowClosing(WindowEvent e) {
                 Arrays.fill(returnValues, null);
                 returnValues[times] = "Cancel";
+                dialog.dispose();
             }
         });
 

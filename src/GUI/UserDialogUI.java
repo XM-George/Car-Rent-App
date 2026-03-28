@@ -15,7 +15,7 @@ import java.util.Objects;
 public class UserDialogUI extends BaseDialogUI
 {
 
-    String[] userOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username") , I18n.getString("password")};
+    String[] userOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("email") , I18n.getString("password")};
     String typeOf = "user";
     String filename = "/icons/userUI.png";
     EntitySearch search = new EntitySearch();
@@ -23,7 +23,7 @@ public class UserDialogUI extends BaseDialogUI
     public void AddUser()
     {
         String[] result = UIConstructor(I18n.getString("user.add"), typeOf, userOptions, "Add", filename);
-        if(!result[userOptions.length].equals("Cancel"))
+        if(!"Cancel".equals(result[userOptions.length]))
         {
             int check = UserHelp.checkUserDetails(result);
             if(check == -1)
@@ -36,9 +36,9 @@ public class UserDialogUI extends BaseDialogUI
 
     public void RemoveUser(String username)
     {
-        String[] userOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username")};
-        String[] result = UIConstructor(I18n.getString("user.delete"), typeOf, userOptions, "Find", filename);
-        if(!result[userOptions.length].equals("Cancel"))
+        String[] searchUserOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("email")};
+        String[] result = UIConstructor(I18n.getString("user.delete"), typeOf, searchUserOptions, "Find", filename);
+        if(!"Cancel".equals(result[searchUserOptions.length]))
         {
             int s = search.searchEntity(result, typeOf);
             int selection;

@@ -53,7 +53,7 @@ public class RentDialogUI extends BaseDialogUI
                 String[] vehicleOptions = {I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") , I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
                 String typeOf = "vehicle";
                 String[] result = UIConstructor(dialogText, typeOf, vehicleOptions, "Find", filename);
-                if (!result[vehicleOptions.length].equals("Cancel"))
+                if (!"Cancel".equals(result[vehicleOptions.length]))
                 {
                     int s = new EntitySearch().searchEntity(result, typeOf);
                     if (s < 0)

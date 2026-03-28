@@ -3,6 +3,7 @@ package GUI;
 import API.Customer;
 import API.User;
 import API.Vehicle;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.*;
@@ -40,49 +41,52 @@ public class MainApp implements ActionListener
 
         JMenuBar menuBar = new JMenuBar();
 
-        JMenu userMenu = new JMenu("Χρήστες");
+        JMenu userMenu = new JMenu(I18n.getString("users"));
 
-        JMenuItem currentUser = new JMenuItem("Τρέχων Χρήστης");
-        JMenuItem addUser = new JMenuItem("Προσθήκη Χρήστη");
-        JMenuItem removerUser = new JMenuItem("Διαγραφή Χρήστη");
-        JMenuItem signOut = new JMenuItem("Αποσύνδεση");
+        JMenuItem currentUser = new JMenuItem(I18n.getString("user.current"));
+        JMenuItem addUser = new JMenuItem(I18n.getString("user.add"));
+        JMenuItem removeUser = new JMenuItem(I18n.getString("user.delete"));
+        JMenuItem signOut = new JMenuItem(I18n.getString("disconnect"));
 
-        JMenu customerMenu = new JMenu("Πελάτες");
+        JMenu customerMenu = new JMenu(I18n.getString("customers"));
 
-        JMenuItem addCustomer = new JMenuItem("Προσθήκη Πελάτη");
-        JMenuItem editCustomer = new JMenuItem("Επεξεργασία Πληροφοριών Πελάτη");
-        JMenuItem searchCustomer = new JMenuItem("Αναζήτηση Πελάτη");
-        JMenuItem customerHistory = new JMenuItem("Προβολή Ιστορικού Πελάτη");
+        JMenuItem addCustomer = new JMenuItem(I18n.getString("customer.add"));
+        JMenuItem editCustomer = new JMenuItem(I18n.getString("customer.edit.info"));
+        JMenuItem searchCustomer = new JMenuItem(I18n.getString("customer.search"));
+        JMenuItem customerHistory = new JMenuItem(I18n.getString("customer.history.see"));
 
-        JMenu vehicleMenu = new JMenu("Οχήματα");
+        JMenu vehicleMenu = new JMenu(I18n.getString("vehicles"));
 
-        JMenuItem addVehicle = new JMenuItem("Προσθήκη Οχήματος");
-        JMenuItem editVehicle = new JMenuItem("Επεξεργασία Πληροφοριών Οχήματος");
-        JMenuItem searchVehicle = new JMenuItem("Αναζήτηση Οχήματος");
-        JMenuItem vehicleHistory = new JMenuItem("Προβολή Ιστορικού Οχήματος");
+        JMenuItem addVehicle = new JMenuItem(I18n.getString("vehicle.add"));
+        JMenuItem editVehicle = new JMenuItem(I18n.getString("vehicle.edit.info"));
+        JMenuItem searchVehicle = new JMenuItem(I18n.getString("vehicle.search"));
+        JMenuItem vehicleHistory = new JMenuItem(I18n.getString("vehicle.history.see"));
 
-        JMenu rentMenu = new JMenu("Ενοικίαση");
+        JMenu rentMenu = new JMenu(I18n.getString("rent"));
 
-        JMenuItem rentVehicle = new JMenuItem("Ενοικίαση Οχήματος");
-        JMenuItem returnVehicle = new JMenuItem("Επιστροφή Οχήματος");
+        JMenuItem rentVehicle = new JMenuItem(I18n.getString("vehicle.rent"));
+        JMenuItem returnVehicle = new JMenuItem(I18n.getString("vehicle.return"));
 
 
         userMenu.setMnemonic(KeyEvent.VK_U);
 
         userMenu.add(currentUser);
-        currentUser.setText("Τρέχων Χρήστης :  " + username);
+        currentUser.setText(I18n.getString("user.current") + ":  " + username);
         currentUser.setEnabled(false);
 
         userMenu.add(addUser);
         addUser.setMnemonic(KeyEvent.VK_A);
+        addUser.setActionCommand("ADD_USER");
         addUser.addActionListener(this);
 
-        userMenu.add(removerUser);
-        removerUser.setMnemonic(KeyEvent.VK_R);
-        removerUser.addActionListener(this);
+        userMenu.add(removeUser);
+        removeUser.setMnemonic(KeyEvent.VK_R);
+        removeUser.setActionCommand("REMOVE_USER");
+        removeUser.addActionListener(this);
 
         userMenu.add(signOut);
         signOut.setMnemonic(KeyEvent.VK_S);
+        signOut.setActionCommand("SIGN_OUT");
         signOut.addActionListener(this);
 
 
@@ -90,48 +94,58 @@ public class MainApp implements ActionListener
 
         customerMenu.add(addCustomer);
         addCustomer.setMnemonic(KeyEvent.VK_A);
+        addCustomer.setActionCommand("ADD_CUSTOMER");
         addCustomer.addActionListener(this);
 
         customerMenu.add(editCustomer);
         editCustomer.setMnemonic(KeyEvent.VK_E);
+        editCustomer.setActionCommand("EDIT_CUSTOMER");
         editCustomer.addActionListener(this);
 
         customerMenu.add(searchCustomer);
         searchCustomer.setMnemonic(KeyEvent.VK_S);
+        searchCustomer.setActionCommand("SEARCH_CUSTOMER");
         searchCustomer.addActionListener(this);
 
         customerMenu.add(customerHistory);
         customerHistory.setMnemonic(KeyEvent.VK_H);
+        customerHistory.setActionCommand("HISTORY_CUSTOMER");
         customerHistory.addActionListener(this);
 
 
         vehicleMenu.setMnemonic(KeyEvent.VK_V);
 
         vehicleMenu.add(addVehicle);
-        addVehicle.addActionListener(this);
         addVehicle.setMnemonic(KeyEvent.VK_A);
+        addVehicle.setActionCommand("ADD_VEHICLE");
+        addVehicle.addActionListener(this);
 
         vehicleMenu.add(editVehicle);
-        editVehicle.addActionListener(this);
         editVehicle.setMnemonic(KeyEvent.VK_E);
+        editVehicle.setActionCommand("EDIT_VEHICLE");
+        editVehicle.addActionListener(this);
 
         vehicleMenu.add(searchVehicle);
-        searchVehicle.addActionListener(this);
         searchVehicle.setMnemonic(KeyEvent.VK_S);
+        searchVehicle.setActionCommand("SEARCH_VEHICLE");
+        searchVehicle.addActionListener(this);
 
         vehicleMenu.add(vehicleHistory);
-        vehicleHistory.addActionListener(this);
         vehicleHistory.setMnemonic(KeyEvent.VK_H);
+        vehicleHistory.setActionCommand("HISTORY_VEHICLE");
+        vehicleHistory.addActionListener(this);
 
 
         rentMenu.setMnemonic(KeyEvent.VK_R);
 
         rentMenu.add(rentVehicle);
         rentVehicle.setMnemonic(KeyEvent.VK_R);
+        rentVehicle.setActionCommand("RENT_VEHICLE");
         rentVehicle.addActionListener(this);
 
         rentMenu.add(returnVehicle);
         returnVehicle.setMnemonic(KeyEvent.VK_T);
+        returnVehicle.setActionCommand("RETURN_VEHICLE");
         returnVehicle.addActionListener(this);
 
 
@@ -141,7 +155,7 @@ public class MainApp implements ActionListener
         menuBar.add(rentMenu);
         frame.setJMenuBar(menuBar);
 
-        JButton userButton = buttonForMainApp("Προβολή Όλων Των Χρηστών","/icons/userUI.png");
+        JButton userButton = buttonForMainApp(I18n.getString("users.show"),"/icons/userUI.png");
         userButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -157,7 +171,7 @@ public class MainApp implements ActionListener
             }
         });
 
-        JButton customerButton = buttonForMainApp("Προβολή Όλων Των Πελατών", "/icons/customerUI.png");
+        JButton customerButton = buttonForMainApp(I18n.getString("customers.show"), "/icons/customerUI.png");
         customerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,7 +214,7 @@ public class MainApp implements ActionListener
             }
         });
 
-        JButton vehicleButton = buttonForMainApp("Προβολή Όλων Των Οχημάτων", "/icons/carUI.png");
+        JButton vehicleButton = buttonForMainApp(I18n.getString("vehicles.show"), "/icons/carUI.png");
         vehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -242,7 +256,7 @@ public class MainApp implements ActionListener
                 }
             }
         });
-        JButton rentButton = buttonForMainApp("Ενοικίαση Οχήματος", "/icons/car_rentUI.png");
+        JButton rentButton = buttonForMainApp(I18n.getString("vehicle.rent"), "/icons/car_rentUI.png");
         rentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -250,7 +264,7 @@ public class MainApp implements ActionListener
                 r.RentVehicleUI("Rent", username);
             }
         });
-        JButton returnButton = buttonForMainApp("Επιστροφή Οχήματος", "/icons/car_rentUI.png");
+        JButton returnButton = buttonForMainApp(I18n.getString("vehicle.return"), "/icons/car_rentUI.png");
         returnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -262,7 +276,7 @@ public class MainApp implements ActionListener
 
 
 
-        JPanel gridPanel = new JPanel(new GridLayout(2, 2, 40, 40));
+        JPanel gridPanel = new JPanel(new GridLayout(2, 0, 40, 40));
         gridPanel.add(userButton);
         gridPanel.add(customerButton);
         gridPanel.add(vehicleButton);
@@ -304,43 +318,43 @@ public class MainApp implements ActionListener
         VehicleDialogUI v = new VehicleDialogUI();
         RentDialogUI r = new RentDialogUI();
         switch (e.getActionCommand()){
-            case "Προσθήκη Χρήστη":
+            case "ADD_USER":
                 u.AddUser();
                 break;
-            case "Διαγραφή Χρήστη":
+            case "REMOVE_USER":
                 u.RemoveUser(username);
                 break;
-            case "Αποσύνδεση":
+            case "SIGN_OUT":
                 u.SignOut(frame);
                 break;
-            case "Προσθήκη Πελάτη":
+            case "ADD_CUSTOMER":
                 c.AddCustomer();
                 break;
-            case "Επεξεργασία Πληροφοριών Πελάτη":
+            case "EDIT_CUSTOMER":
                 c.EditCustomerDetails();
                 break;
-            case "Αναζήτηση Πελάτη":
+            case "SEARCH_CUSTOMER":
                 c.SearchCustomer();
                 break;
-            case "Προβολή Ιστορικού Πελάτη":
+            case "HISTORY_CUSTOMER":
                 c.SeeCustomerHistory();
                 break;
-            case "Προσθήκη Οχήματος":
+            case "ADD_VEHICLE":
                 v.AddVehicle();
                 break;
-            case "Επεξεργασία Πληροφοριών Οχήματος":
+            case "EDIT_VEHICLE":
                 v.EditVehicleDetails();
                 break;
-            case "Αναζήτηση Οχήματος":
+            case "SEARCH_VEHICLE":
                 v.SearchVehicle();
                 break;
-            case "Προβολή Ιστορικού Οχήματος":
+            case "HISTORY_VEHICLE":
                 v.SeeVehicleHistory();
                 break;
-            case "Ενοικίαση Οχήματος":
+            case "RENT_VEHICLE":
                 r.RentVehicleUI("Rent", username);
                 break;
-            case "Επιστροφή Οχήματος":
+            case "RETURN_VEHICLE":
                 r.ReturnVehicleUI();
                 break;
         }

@@ -2,6 +2,7 @@ package GUI;
 
 
 import API.UserHelp;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,7 +62,7 @@ public class Login extends BaseDialogUI
                 frame.add(loginSuccess);
                 if(check==1)
                 {
-                    loginSuccess.setText("Επιτυχής Είσοδος");
+                    loginSuccess.setText(I18n.getString("login.success"));
                     loginSuccess.setBounds(120,240,180,30);
                     loginSuccess.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                     loginSuccess.setForeground(Color.GREEN);
@@ -72,7 +73,7 @@ public class Login extends BaseDialogUI
                 }
                 else if(check==0)
                 {
-                    loginSuccess.setText("Λάθος Κωδικός");
+                    loginSuccess.setText(I18n.getString("login.password.wrong"));
                     loginSuccess.setBounds(125,240,150,30);
                     loginSuccess.setForeground(Color.RED);
                     loginSuccess.setVisible(true);
@@ -80,7 +81,7 @@ public class Login extends BaseDialogUI
                 }
                 else if(check==2)
                 {
-                    loginSuccess.setText("Δεν Βρέθηκε Χρήστης");
+                    loginSuccess.setText(I18n.getString("login.user.notFound"));
                     loginSuccess.setBounds(90,240,220,30);
                     loginSuccess.setForeground(Color.RED);
                     loginSuccess.setVisible(true);

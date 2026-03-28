@@ -29,12 +29,12 @@ public class RentDialogUI extends BaseDialogUI
         switch(use)
         {
             case ("Rent"):
-                dialogText = "Ενοικίαση Οχήματος";
-                labelText = "Ενοικίαση Οχήματος";
+                dialogText = I18n.getString("vehicle.rent");
+                labelText = I18n.getString("vehicle.rent");
                 break;
             case ("Return"):
-                dialogText = "Επιστροφή Οχήματος";
-                labelText = "Επιστροφή Οχήματος";
+                dialogText = I18n.getString("vehicle.return");
+                labelText = I18n.getString("vehicle.return");
                 break;
         }
 
@@ -44,13 +44,13 @@ public class RentDialogUI extends BaseDialogUI
 
         JLabel label = createLabel(labelText, 145, 30,210,30);
 
-        JButton customerButton = createButton("Αναζήτηση Πελάτη", 260,110,230,40);
-        JButton vehicleButton = createButton( "Αναζήτηση Οχήματος", 10,110,240,40);
+        JButton customerButton = createButton(I18n.getString("customer.search"), 260,110,230,40);
+        JButton vehicleButton = createButton(I18n.getString("vehicle.search"), 10,110,240,40);
         vehicleButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                String[] vehicleOptions = {"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
+                String[] vehicleOptions = {I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") , I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
                 String typeOf = "vehicle";
                 String[] result = UIConstructor(dialogText, typeOf, vehicleOptions, "Find", filename);
                 if (!result[vehicleOptions.length].equals("Cancel"))
@@ -70,7 +70,7 @@ public class RentDialogUI extends BaseDialogUI
                             switch(use)
                                 {
                                     case ("Rent"):
-                                        if (v.get(selection).getState().equals("Ενοικιασμένο"))
+                                        if (v.get(selection).getState().equals(I18n.getString("vehicle.status.rented")))
                                         {
                                             RentError("VehicleRented");
                                             return;
@@ -94,7 +94,7 @@ public class RentDialogUI extends BaseDialogUI
                                         }
                                         break;
                                     case ("Return"):
-                                        if (v.get(selection).getState().equals("Διαθέσιμο"))
+                                        if (v.get(selection).getState().equals(I18n.getString("vehicle.status.available")))
                                         {
                                             RentError("VehicleAvailable");
                                             return;
@@ -120,16 +120,16 @@ public class RentDialogUI extends BaseDialogUI
             public void actionPerformed(ActionEvent e) {
 
 
-                String[] customerOptions = {"Όνομα", "Επίθετο", "Email", "Τηλέφωνο", "ΑΦΜ"};
+                String[] customerOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("phone") , I18n.getString("email") , I18n.getString("id")};
                 String typeOf = "customer";
                 String UIConstructorText = "";
                 switch(use)
                 {
                     case ("Rent"):
-                        UIConstructorText = "Ενοικίαση Σε Πελάτη";
+                        UIConstructorText = I18n.getString("customer.rent");
                         break;
                     case ("Return"):
-                        UIConstructorText = "Επιστροφή Από Πελάτη";
+                        UIConstructorText = I18n.getString("customer.return");
                         break;
                 }
                 String[] result = UIConstructor(UIConstructorText, typeOf, customerOptions,"Find", filename);
@@ -172,7 +172,7 @@ public class RentDialogUI extends BaseDialogUI
                                     boolean flag = false;
                                     for (Rent r : c.get(selection).getRents())
                                     {
-                                        if(r.getVehicle().getState().equals("Ενοικιασμένο"))
+                                        if(r.getVehicle().getState().equals(I18n.getString("vehicle.status.rented")))
                                         {
                                             flag=true;
                                             break;
@@ -226,16 +226,16 @@ public class RentDialogUI extends BaseDialogUI
         switch (use)
         {
             case ("customer"):
-                rentErrorDialog = createDialog("Δεν Βρέθηκαν Ενοικιασμένα Οχήματα", 500, 200);
-                rentErrorLabel = createLabel("Ο Πελάτης Δεν Έχει Ενοικιασμένα Οχήματα", 20, 40, 460, 40);
+                rentErrorDialog = createDialog(I18n.getString("rent.vehicles.notFound"), 500, 200);
+                rentErrorLabel = createLabel(I18n.getString("customer.vehicles.rented.notFound"), 20, 40, 460, 40);
                 break;
             case ("VehicleRented"):
-                 rentErrorDialog = createDialog("Ενοικιασμένο Όχημα", 500, 200);
-                 rentErrorLabel = createLabel("Το Όχημα Είναι Ήδη Ενοικιασμένο", 60, 40, 380, 40);
+                 rentErrorDialog = createDialog(I18n.getString("vehicle.rented"), 500, 200);
+                 rentErrorLabel = createLabel(I18n.getString("vehicle.rented.already"), 60, 40, 380, 40);
                 break;
             case ("VehicleAvailable"):
-                rentErrorDialog = createDialog("Το Όχημα Είναι Ήδη Διαθέσιμο", 500, 200);
-                rentErrorLabel = createLabel("Το Όχημα Δεν Είναι Ενοικιασμένο", 60, 40, 380, 40);
+                rentErrorDialog = createDialog(I18n.getString("vehicle.available.already"), 500, 200);
+                rentErrorLabel = createLabel(I18n.getString("vehicle.rented.no"), 60, 40, 380, 40);
                 break;
         }
 
@@ -263,12 +263,12 @@ public class RentDialogUI extends BaseDialogUI
         switch (use)
         {
             case ("Rent"):
-                dialogText = "Η Ενοικίαση Πραγματοποιήθηκε";
-                labelText = "Η Ενοικίαση Καταχωρήθηκε";
+                dialogText = I18n.getString("rent.complete.title");
+                labelText = I18n.getString("rent.complete");
                 break;
             case ("Return"):
-                dialogText = "Η Επιστροφή Πραγματοποιήθηκε";
-                labelText = "Το Όχημα Επιστράφηκε";
+                dialogText = I18n.getString("return.complete.title");
+                labelText = I18n.getString("return.complete");
                 break;
         }
 
@@ -302,7 +302,7 @@ public class RentDialogUI extends BaseDialogUI
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Image icon = new ImageIcon(Objects.requireNonNull(getClass().getResource(filename))).getImage();
-        JDialog dialog = new JDialog(frame, "Επιλογή Ημερομηνίας", true);
+        JDialog dialog = new JDialog(frame, I18n.getString("date.select") , true);
         dialog.getContentPane().setPreferredSize(new Dimension(600,300));
         dialog.pack();
         dialog.setFont(new Font(null, Font.BOLD, 20));
@@ -311,8 +311,8 @@ public class RentDialogUI extends BaseDialogUI
         dialog.setLayout(null);
         dialog.setIconImage(icon);
 
-        JLabel rentLabel = createLabel("Ημερομηνία Έναρξης:",50,20,250,40);
-        JLabel returnLabel = createLabel("Ημερομηνία Λήξης:",50,70,200,40);
+        JLabel rentLabel = createLabel(I18n.getString("date.start"),50,20,250,40);
+        JLabel returnLabel = createLabel(I18n.getString("date.end"),50,70,200,40);
 
         JSpinner rentSpinner = new JSpinner(new SpinnerDateModel());
         rentSpinner.setBounds(350,20,200,40);
@@ -326,7 +326,7 @@ public class RentDialogUI extends BaseDialogUI
 
         JLabel returnBeforeRentErrorLabel = createLabel("",50,150,500,40);
 
-        JButton confirmButton = createButton("Επιβεβαίωση Ενοικίασης",50,240,300,40);
+        JButton confirmButton = createButton(I18n.getString("rent.confirm"),50,240,300,40);
 
         confirmButton.addActionListener(new ActionListener() {
             @Override
@@ -338,12 +338,12 @@ public class RentDialogUI extends BaseDialogUI
                 d[1] = (Date) returnSpinner.getValue();
                 if (d[1].before(d[0]))
                 {
-                    returnBeforeRentErrorLabel.setText("Η Επιστροφή Πρέπει Να Είναι Μετά Την Ενοικίαση.");
+                    returnBeforeRentErrorLabel.setText(I18n.getString("date.return.before.date.rent.error"));
                     returnBeforeRentErrorLabel.setForeground(Color.RED);
                 }
                 else if(d[0].before(today) ||  d[1].before(today))
                 {
-                    returnBeforeRentErrorLabel.setText("Οι Ημερομηνίες Δεν Μπορεί Να Είναι Παρελθοντικές.");
+                    returnBeforeRentErrorLabel.setText(I18n.getString("date.past.error"));
                     returnBeforeRentErrorLabel.setForeground(Color.RED);
                 }
                 else

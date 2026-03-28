@@ -4,6 +4,7 @@ import API.Customer;
 import API.Rent;
 import API.User;
 import API.Vehicle;
+import util.I18n;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -171,38 +172,38 @@ public class BaseDialogUI {
         String buttonText = "";
         switch(typeOf)
         {
-            case ("Χρήστης"):
+            case ("user"):
                 switch(use)
                 {
                     case ("Add"):
-                        buttonText = "Προσθήκη Χρήστη";
+                        buttonText = I18n.getString("user.add");
                         break;
                     case ("Find"):
-                        buttonText = "Αναζήτηση Χρήστη";
+                        buttonText = I18n.getString("user.search");
                         break;
                 }
                 dialogHeight = 450;
                 break;
-            case ("Πελάτης"):
+            case ("customer"):
                 switch(use)
                 {
                     case ("Add"):
-                        buttonText = "Προσθήκη Πελάτη";
+                        buttonText = I18n.getString("customer.add");
                         break;
                     case ("Find"):
-                        buttonText = "Αναζήτηση Πελάτη";
+                        buttonText = I18n.getString("customer.search");
                         break;
                 }
                 dialogHeight = 450;
                 break;
-            case ("Όχημα"):
+            case ("vehicle"):
                 switch(use)
                 {
                     case ("Add"):
-                        buttonText = "Προσθήκη Οχήματος";
+                        buttonText = I18n.getString("vehicle.add");
                         break;
                     case ("Find"):
-                        buttonText = "Αναζήτηση Οχήματος";
+                        buttonText = I18n.getString("vehicle.search");
                         break;
                 }
                 dialogHeight = 650;
@@ -244,7 +245,7 @@ public class BaseDialogUI {
                 {
                     comboBox.setEnabled(false);
                 }
-                if(title.equals("Επιστροφή Οχήματος"))
+                if(title.equals(I18n.getString("vehicle.return")))
                 {
                     comboBox.setSelectedIndex(1);
                 }
@@ -285,7 +286,7 @@ public class BaseDialogUI {
         });
         dialog.add(findButton);
 
-        JButton cancelButton = createButton("Άκυρο", 280, dialogHeight - 70, 100, 40);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 280, dialogHeight - 70, 100, 40);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -319,19 +320,37 @@ public class BaseDialogUI {
     {
         String filename;
         JLabel label = new JLabel();
+        String dialogText = "";
+        String labelText = "";
+
+        switch(entity)
+        {
+            case("user"):
+                dialogText = I18n.getString("entity.notFound",I18n.getString("user.title"));
+                labelText = I18n.getString("entity.notFound",I18n.getString("user.title"));
+                break;
+            case("customer"):
+                dialogText = I18n.getString("entity.notFound",I18n.getString("customer.title"));
+                labelText = I18n.getString("entity.notFound",I18n.getString("customer.title"));
+                break;
+            case("vehicle"):
+                dialogText = I18n.getString("entity.notFound",I18n.getString("vehicle.title"));
+                labelText = I18n.getString("entity.notFound",I18n.getString("vehicle.title"));
+                break;
+        }
 
         if(use == -1)
         {
             filename = "/icons/errorNotFound.png";
-            entityNotFoundDialog = createDialog("Δεν Βρέθηκε " + entity, width, height);
-            label = createLabel("Δεν Βρέθηκε " + entity, 70,40, 260, 40);
+            entityNotFoundDialog = createDialog(dialogText, width, height);
+            label = createLabel(labelText, 70,40, 260, 40);
             addIconToLabel(label, filename);
         }
         else if(use == -2)
         {
             filename = "/icons/warningEmptySearch.png";
-            entityNotFoundDialog = createDialog("Δεν Βρέθηκαν Παράμετροι", width, height);
-            label = createLabel("Εισάγετε Κάποιες Παραμέτρους", 20,40, 360, 40);
+            entityNotFoundDialog = createDialog(I18n.getString("parameters.notFound"), width, height);
+            label = createLabel(I18n.getString("parameters.enterParameters"), 20,40, 360, 40);
             addIconToLabel(label, filename);
         }
 
@@ -362,31 +381,26 @@ public class BaseDialogUI {
         int[] selected = new int[1];
 
         JButton configurableButton = new JButton();
-        JButton cancelButton = createButton("Άκυρο", 0, 0, 0, 0);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 0, 0, 0, 0);
         String dialogText= "";
-        String entityNaming = "";
-
 
         switch(entity)
         {
-            case ("Χρήστης"):
+            case ("user"):
                 columnNames = new String[]{"Όνομα", "Επίθετο", "Username", "Email"};
-                dialogText = "Χρήστες που βρέθηκαν";
-                entityNaming = "Χρήστη";
+                dialogText = I18n.getString("user.found");
                 break;
-            case ("Πελάτης"):
+            case ("customer"):
                 columnNames = new String[]{"Όνομα", "Επίθετο", "Τηλέφωνο", "Email", "ΑΦΜ"};
-                dialogText = "Πελάτες που βρέθηκαν";
-                entityNaming = "Πελάτη";
+                dialogText = I18n.getString("customer.found");
                 break;
-            case ("Όχημα"):
+            case ("vehicle"):
                 columnNames = new String[]{"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
-                dialogText = "Οχήματα που βρέθηκαν";
-                entityNaming = "Οχήματος";
+                dialogText = I18n.getString("vehicle.found");
                 break;
-            case ("Ιστορικό"):
+            case ("history"):
                 columnNames = new String[]{"ID Ενοικίασης", "Χρήστης", "ΑΦΜ Πελάτη","ID Οχήματος", "Πινακίδα Οχήματος", "Ημερομηνία Ενοικίασης","Ημερομηνία Επιστροφής", "Κατάσταση"};
-                dialogText = "Ενοικιάσεις που βρέθηκαν";
+                dialogText = I18n.getString("rent.found");
                 break;
         }
 
@@ -403,7 +417,7 @@ public class BaseDialogUI {
             public Class<?> getColumnClass(int columnIndex) {
                 switch (columnIndex) {
                     case 0:
-                        if(entity.equals("Όχημα") || entity.equals("Ιστορικό"))
+                        if(entity.equals("vehicle") || entity.equals("history"))
                         {
                             return Integer.class;
                         }
@@ -412,7 +426,7 @@ public class BaseDialogUI {
                             return String.class;
                         }
                     case 2:
-                        if(entity.equals("Πελάτης") || entity.equals("Ιστορικό"))
+                        if(entity.equals("customer") || entity.equals("history"))
                         {
                             return Integer.class;
                         }
@@ -421,7 +435,7 @@ public class BaseDialogUI {
                             return String.class;
                         }
                     case 3:
-                        if(entity.equals("Ιστορικό"))
+                        if(entity.equals("history"))
                         {
                             return Integer.class;
                         }
@@ -430,7 +444,7 @@ public class BaseDialogUI {
                             return String.class;
                         }
                     case 4:
-                        if(entity.equals("Πελάτης"))
+                        if(entity.equals("customer"))
                         {
                             return Integer.class;
                         }
@@ -440,7 +454,7 @@ public class BaseDialogUI {
                         }
                     case 5:
                     case 6:
-                        if(entity.equals("Ιστορικό"))
+                        if(entity.equals("history"))
                         {
                             return java.util.Date.class;
                         }
@@ -456,7 +470,7 @@ public class BaseDialogUI {
 
 
         JTable table = createTable(model);
-        if (entity.equals("Ιστορικό"))
+        if (entity.equals("history"))
         {
 
             DefaultTableCellRenderer dateRenderer = new DefaultTableCellRenderer() {
@@ -478,28 +492,28 @@ public class BaseDialogUI {
 
         switch(entity)
         {
-            case ("Χρήστης"):
+            case ("user"):
                 for(User u : (ArrayList<User>) a)
                 {
                     Object[] row = {u.getName(), u.getSurname(), u.getUsername(), u.getEmail()};
                     model.addRow(row);
                 }
                 break;
-            case ("Πελάτης"):
+            case ("customer"):
                 for(Customer c : (ArrayList<Customer>) a)
                 {
                     Object[] row = {c.getName(), c.getSurname(), Long.parseLong(c.getPhone()), c.getEmail(), Integer.parseInt(c.getAfm())};
                     model.addRow(row);
                 }
                 break;
-            case ("Όχημα"):
+            case ("vehicle"):
                 for(Vehicle v : (ArrayList<Vehicle>) a)
                 {
                     Object[] row = {Long.parseLong(v.getId()), v.getPlate(), v.getBrand(), v.getType(), v.getModel(), v.getYearOfProduction(), v.getColor(), v.getState()};
                     model.addRow(row);
                 }
                 break;
-            case ("Ιστορικό"):
+            case ("history"):
                 for (Rent r : (ArrayList<Rent>) a)
                 {
                     Object[] row = {r.getRentId(), r.getUsername(), Long.parseLong(r.getCustomer().getAfm()), Long.parseLong(r.getVehicle().getId()), r.getVehicle().getPlate(),r.getRentDate(), r.getReturnDate(), r.getState()};
@@ -512,35 +526,35 @@ public class BaseDialogUI {
         switch(use)
         {
             case ("Delete"):
-                configurableButton = createButton("Διαγραφή " + entityNaming, 0, 0, 0, 0);
+                configurableButton = createButton(I18n.getString(entity + ".delete" ), 0, 0, 0, 0);
                 break;
             case ("Edit"), ("All"):
-                configurableButton = createButton("Επεξεργασία " + entityNaming, 0, 0, 0, 0);
+                configurableButton = createButton(I18n.getString(entity + ".edit.info"), 0, 0, 0, 0);
                 break;
             case ("Search"):
                 configurableButton = createButton("OK", 0, 0, 0, 0);
                 break;
             case ("Select"):
-                configurableButton = createButton("Επιλογή", 0, 0, 0, 0);
+                configurableButton = createButton(I18n.getString("select"), 0, 0, 0, 0);
                 break;
             case ("History"):
-                configurableButton = createButton("Προβολή Ιστορικού " + entityNaming, 0, 0, 0, 0);
+                configurableButton = createButton(I18n.getString(entity + ".history.see"), 0, 0, 0, 0);
                 break;
             case ("Rent"):
-                configurableButton = createButton("Επιλογή " + entityNaming, 0, 0, 0, 0);
+                configurableButton = createButton(I18n.getString(entity + ".select"), 0, 0, 0, 0);
                 break;
             case ("Return"):
-                if(entityNaming.equals("Πελάτη"))
+                if(entity.equals("customer"))
                 {
-                    configurableButton = createButton("Επιστροφή από " + entityNaming, 0, 0, 0, 0);
+                    configurableButton = createButton(I18n.getString("customer.return"), 0, 0, 0, 0);
                 }
-                else if(entity.equals("Ιστορικό"))
+                else if(entity.equals("history"))
                 {
-                    configurableButton = createButton("Επιστροφή", 0, 0, 0, 0);
+                    configurableButton = createButton(I18n.getString("return"), 0, 0, 0, 0);
                 }
                 else
                 {
-                    configurableButton = createButton("Επιστροφή " + entityNaming, 0, 0, 0, 0);
+                    configurableButton = createButton(I18n.getString("vehicle.return"), 0, 0, 0, 0);
                 }
                 break;
         }
@@ -583,7 +597,7 @@ public class BaseDialogUI {
         bottomPanel.add(Box.createHorizontalStrut(30));
         if(use.equals("All"))
         {
-            JButton extraButton = createButton("Προβολή Ιστορικού " + entityNaming, 0, 0, 0, 0);
+            JButton extraButton = createButton(I18n.getString(entity + ".history.see"), 0, 0, 0, 0);
             extraButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e)
@@ -595,7 +609,7 @@ public class BaseDialogUI {
                     }
                     else
                     {
-                       if(entity.equals("Όχημα"))
+                       if(entity.equals("vehicle"))
                        {
                            selected[0] = table.convertRowIndexToModel(row) + Vehicle.getCars().size();
                        }
@@ -640,42 +654,42 @@ public class BaseDialogUI {
             String labelText = "";
             switch(typeOf)
             {
-                case ("Χρήστης"):
+                case ("user"):
                     switch(use)
                     {
                         case ("Add"):
-                            dialogText = "Προσθήκη Χρήστη";
-                            labelText = "Επιτυχής Προσθήκη";
+                            dialogText = I18n.getString("user.add");
+                            labelText = I18n.getString("add.success");
                             break;
                         case ("Delete"):
-                            dialogText = "Διαγραφή Χρήστη";
-                            labelText = "Επιτυχής Διαγραφή";
+                            dialogText = I18n.getString("user.delete");
+                            labelText = I18n.getString("delete.success");
                             break;
                     }
                     break;
-                case ("Πελάτης"):
+                case ("customer"):
                     switch(use)
                     {
                         case ("Add"):
-                            dialogText = "Προσθήκη Πελάτη";
-                            labelText = "Επιτυχής Προσθήκη";
+                            dialogText = I18n.getString("customer.add");
+                            labelText = I18n.getString("add.success");
                             break;
                         case ("Edit"):
-                            dialogText = "Επεξεργασία Πελάτη";
-                            labelText = "Επιτυχής Επεξεργασία";
+                            dialogText = I18n.getString("customer.edit");
+                            labelText = I18n.getString("edit.success");
                             break;
                     }
                     break;
-                case ("Όχημα"):
+                case ("vehicle"):
                     switch(use)
                     {
                         case ("Add"):
-                            dialogText = "Προσθήκη Οχήματος";
-                            labelText = "Επιτυχής Προσθήκη";
+                            dialogText = I18n.getString("vehicle.add");
+                            labelText = I18n.getString("add.success");
                             break;
                         case ("Edit"):
-                            dialogText = "Επεξεργασία Οχήματος";
-                            labelText = "Επιτυχής Επεξεργασία";
+                            dialogText = I18n.getString("vehicle.edit");
+                            labelText = I18n.getString("edit.success");
                             break;
                     }
                     break;
@@ -706,58 +720,58 @@ public class BaseDialogUI {
             String filename = "/icons/errorNotFound.png";
             switch(typeOf)
             {
-                case "Χρήστης":
-                    itemList = new String[]{"Όνομα", "Επίθετο", "Username", "Email", "Password"};
+                case "user":
+                    itemList = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("email") , I18n.getString("password")};
                     if (check < itemList.length)
                     {
-                        dialogCheckerUI = createDialog("Λάθος " + itemList[check] + " Χρήστη", 500,200);
-                        label = createLabel("Το " + itemList[check] + " Δεν Μπορεί Να Είναι Κενό", 30, 50, 440, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("user.error.wrong" , itemList[check]), 500,200);
+                        label = createLabel(I18n.getString("user.error.empty" , itemList[check]), 30, 50, 440, 40);
                     } else if (check == 5)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Username Χρήστη", 500,200);
-                        label = createLabel("Το Username Χρησιμοποιείται Ήδη", 60, 50, 380, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("user.error.wrong" , "username"), 500,200);
+                        label = createLabel(I18n.getString("user.error.exists" , "username"), 60, 50, 380, 40);
                     }
                     else if (check == 6)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Email Χρήστη", 500, 200);
-                        label = createLabel("Το Email Χρησιμοποιείται Ήδη", 80, 50, 340, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("user.error.wrong" , "email"), 500, 200);
+                        label = createLabel(I18n.getString("user.error.exists" , "email"), 80, 50, 340, 40);
                     }
                     else if (check == 7)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Email Χρήστη", 500, 200);
-                        label = createLabel("To Email Πρέπει Να Περιέχει @", 75, 50, 350, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("user.error.wrong" , "email"), 500, 200);
+                        label = createLabel(I18n.getString("error.email.invalid"), 75, 50, 350, 40);
                     }
                     break;
-                case "Πελάτης":
-                    itemList = new String[]{"Όνομα", "Επίθετο", "Τηλέφωνο", "Email", "ΑΦΜ"};
+                case "customer":
+                    itemList = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("phone") , I18n.getString("email"), I18n.getString("id")};
                     if (check < itemList.length)
                     {
-                        dialogCheckerUI = createDialog("Λάθος " + itemList[check] + " Πελάτη", 500,200);
-                        label = createLabel("Το " + itemList[check] + " Δεν Μπορεί Να Είναι Κενό", 33, 50, 434, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("customer.error.wrong" , itemList[check]), 500,200);
+                        label = createLabel(I18n.getString("customer.error.empty" , itemList[check]), 33, 50, 434, 40);
                     }
                     else if (check == 5)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Τηλέφωνο Πελάτη", 500, 200);
-                        label = createLabel("Εισάγεται Έγκυρο Αριθμό Τηλεφώνου", 45, 50, 410, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("customer.error.wrong" , I18n.getString("phone")), 500, 200);
+                        label = createLabel(I18n.getString("customer.error.phone"), 45, 50, 410, 40);
                     }
                     else if (check == 6)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Email Πελάτη", 500, 200);
-                        label = createLabel("To Email Πρέπει Να Περιέχει @", 75, 50, 350, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("customer.error.wrong" , "email"), 500, 200);
+                        label = createLabel(I18n.getString("error.email.invalid"), 75, 50, 350, 40);
                     }
                     else if (check == 7)
                     {
-                        dialogCheckerUI = createDialog("Λάθος ΑΦΜ Πελάτη", 500,200);
-                        label = createLabel("Το ΑΦΜ Χρησιμοποιείται Ήδη", 80, 50, 340, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("customer.error.wrong" , "ID"), 500,200);
+                        label = createLabel(I18n.getString("customer.error.exists" , "ID"), 80, 50, 340, 40);
                     }
                     else if (check == 8)
                     {
-                        dialogCheckerUI = createDialog("Λάθος ΑΦΜ Πελάτη", 500,200);
-                        label = createLabel("Εισάγεται Έγκυρο ΑΦΜ", 110, 50, 280, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("customer.error.wrong" , "ID"), 500,200);
+                        label = createLabel(I18n.getString("customer.error.id"), 110, 50, 280, 40);
                     }
                     break;
-                case "Όχημα":
-                    itemList = new String[]{"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
+                case "vehicle":
+                    itemList = new String[]{I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") , I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
                     if (check < itemList.length)
                     {
                         String arthro;
@@ -777,32 +791,32 @@ public class BaseDialogUI {
                             arthro = "Το ";
                             kataliksi = "ό";
                         }
-                        dialogCheckerUI = createDialog("Λάθος " + itemList[check] + " Οχήματος", 500,200);
-                        label = createLabel(arthro + itemList[check] + " Δεν Μπορεί Να Είναι Κεν" + kataliksi , 40, 50, 420, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , itemList[check]), 500,200);
+                        label = createLabel(I18n.getString("vehicle.error.empty" , arthro , itemList[check] , kataliksi) , 40, 50, 420, 40);
                     } else if (check == 8)
                     {
-                        dialogCheckerUI = createDialog("Λάθος ID Οχήματος", 500,200);
-                        label = createLabel("Το ID Χρησιμοποιείται Ήδη", 90, 50, 320, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("id")), 500,200);
+                        label = createLabel(I18n.getString("vehicle.error.exists" , "Το" , I18n.getString("id")), 90, 50, 320, 40);
                     }
                     else if (check == 9)
                     {
-                        dialogCheckerUI = createDialog("Λάθος ID Οχήματος", 500,200);
-                        label = createLabel("Το ID Δεν Είναι Έγκυρος Αριθμός", 60, 50, 380, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("id")), 500,200);
+                        label = createLabel(I18n.getString("vehicle.error.id.invalid"), 60, 50, 380, 40);
                     }
                     else if (check == 10)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Πινακίδα Οχήματος", 500, 200);
-                        label = createLabel("Η Πινακίδα Χρησιμοποιείται Ήδη", 60, 50, 380, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("numberplate")), 500, 200);
+                        label = createLabel(I18n.getString("vehicle.error.exists" , "Η" , I18n.getString("numberplate")), 60, 50, 380, 40);
                     }
                     else if (check == 11)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Έτος Οχήματος", 500, 200);
-                        label = createLabel("Εισάγεται Έγκυρο Έτος (1885 - 2026)", 50, 50, 400, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("year")), 500, 200);
+                        label = createLabel(I18n.getString("vehicle.error.year.invalid"), 50, 50, 400, 40);
                     }
                     else if (check == 12)
                     {
-                        dialogCheckerUI = createDialog("Λάθος Κατάσταση Οχήματος", 500, 200);
-                        label = createLabel("Το Όχημα Είναι Ενοικιασμένο Σε Πελάτη", 30, 50, 440, 40);
+                        dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("status")), 500, 200);
+                        label = createLabel(I18n.getString("vehicle.error.rented"), 30, 50, 440, 40);
                     }
                     break;
             }
@@ -842,74 +856,88 @@ public class BaseDialogUI {
 
         switch (typeOf)
         {
-            case ("Χρήστης"):
+            case ("user"):
                 //noinspection SwitchStatementWithTooFewBranches
                 switch(use)
                 {
                     case ("Delete"):
-                        dialogText = "Επιβεβαίωση Διαγραφής Χρήστη";
-                        labelText = "Διαγραφή του Χρήστη?";
-                        buttonText = "Διαγραφή";
+                        dialogText = I18n.getString("user.delete.confirm");
+                        labelText = I18n.getString("user.delete.question");
+                        buttonText = I18n.getString("delete");
                         break;
                 }
                 User u = (User) o;
-                text = " Όνομα: " + u.getName() + "\n Επίθετο: " + u.getSurname() + "\n Username: " + u.getUsername() + "\n Email: " + u.getEmail() ;
+                text =  I18n.getString("name") + ": " + u.getName() + "\n" +
+                        I18n.getString("surname") + ": " + u.getSurname() + "\n" +
+                        I18n.getString("username") + ": " + u.getUsername() + "\n" +
+                        I18n.getString("email") + ": " + u.getEmail() ;
                 break;
-            case ("Πελάτης"):
+            case ("customer"):
                 switch(use)
                 {
                     case ("Edit"):
-                        dialogText = "Επιβεβαίωση Επεξεργασίας Πελάτη";
-                        labelText = "Επεξεργασία του Πελάτη?";
-                        buttonText = "Επεξεργασία";
+                        dialogText = I18n.getString("customer.edit.confirm");
+                        labelText = I18n.getString("customer.edit.question");
+                        buttonText = I18n.getString("edit");
                         break;
                     case ("History"):
-                        dialogText = "Επιβεβαίωση Προβολής Ιστορικού Πελάτη";
-                        labelText = "Προβολή Ιστορικού του Πελάτη?";
-                        buttonText = "Προβολή";
+                        dialogText = I18n.getString("customer.history.see.confirm");
+                        labelText = I18n.getString("customer.history.see.question");
+                        buttonText = I18n.getString("see");
                         width=540;
                         break;
                     case ("Rent"):
-                        dialogText = "Επιβεβαίωση Ενοικίασης Οχήματος";
-                        labelText = "Ενοικίαση σε Πελάτη?";
-                        buttonText = "Ενοικίαση";
+                        dialogText = I18n.getString("vehicle.rent.confirm");
+                        labelText = I18n.getString("customer.rent.question");
+                        buttonText = I18n.getString("rent");
                         break;
                     case ("Return"):
-                        dialogText = "Επιβεβαίωση Επιστροφής Οχήματος";
-                        labelText = "Επιστροφή από Πελάτη?";
-                        buttonText = "Επιστροφή";
+                        dialogText = I18n.getString("vehicle.return.confirm");
+                        labelText = I18n.getString("customer.return.question");
+                        buttonText = I18n.getString("return");
                         break;
                 }
                 Customer c = (Customer) o;
-                text = " Όνομα: " + c.getName() + "\n Επίθετο: " + c.getSurname() + "\n Τηλέφωνο: " + c.getPhone() + "\n Email: " + c.getEmail() + "\n ΑΦΜ: " + c.getAfm();
+                text =  I18n.getString("name") + ": " + c.getName() + "\n" +
+                        I18n.getString("surname") + ": " + c.getSurname() + "\n" +
+                        I18n.getString("phone") + ": " + c.getPhone() + "\n" +
+                        I18n.getString("email") + ": " + c.getEmail() + "\n" +
+                        I18n.getString("id") + ": " + c.getAfm();
                 break;
-            case ("Όχημα"):
+            case ("vehicle"):
                 switch(use)
                 {
                     case ("Edit"):
-                        dialogText = "Επιβεβαίωση Επεξεργασίας Οχήματος";
-                        labelText = "Επεξεργασία του Οχήματος?";
-                        buttonText = "Επεξεργασία";
+                        dialogText = I18n.getString("vehicle.edit.confirm");
+                        labelText = I18n.getString("vehicle.edit.question");
+                        buttonText = I18n.getString("edit");
                         break;
                     case ("History"):
-                        dialogText = "Επιβεβαίωση Προβολής Ιστορικού Οχήματος";
-                        labelText = "Προβολή Ιστορικού του Οχήματος?";
-                        buttonText = "Προβολή";
+                        dialogText = I18n.getString("vehicle.history.see.confirm");
+                        labelText = I18n.getString("vehicle.history.see.question");
+                        buttonText = I18n.getString("see");
                         width=540;
                         break;
                     case ("Rent"):
-                        dialogText = "Επιβεβαίωση Ενοικίασης Οχήματος";
-                        labelText = "Ενοικίαση του Οχήματος?";
-                        buttonText = "Ενοικίαση";
+                        dialogText = I18n.getString("vehicle.rent.confirm");
+                        labelText = I18n.getString("vehicle.rent.question");
+                        buttonText = I18n.getString("rent");
                         break;
                     case ("Return"):
-                        dialogText = "Επιβεβαίωση Επιστροφής Οχήματος";
-                        labelText = "Επιστροφή του Οχήματος?";
-                        buttonText = "Επιστροφή";
+                        dialogText = I18n.getString("vehicle.return.confirm");
+                        labelText = I18n.getString("vehicle.return.question");
+                        buttonText = I18n.getString("return");
                         break;
                 }
                 Vehicle v = (Vehicle) o;
-                text = " ID: " + v.getId() + "\n Πινακίδα: " + v.getPlate() + "\n Μάρκα: " + v.getBrand() + "\n Τύπος: " + v.getType() + "\n Μοντέλο: " + v.getModel() + "\n Έτος: " + v.getYearOfProduction() + "\n Χρώμα: " + v.getColor() + "\n Κατάσταση: " + v.getState();
+                text =  I18n.getString("id") + ": " + v.getId() + "\n" +
+                        I18n.getString("numberplate") + ": " + v.getPlate() + "\n" +
+                        I18n.getString("make") + ": " + v.getBrand() + "\n" +
+                        I18n.getString("type") + ": " + v.getType() + "\n" +
+                        I18n.getString("model") + ": " + v.getModel() + "\n" +
+                        I18n.getString("year") + ": " + v.getYearOfProduction() + "\n" +
+                        I18n.getString("color") + ": " + v.getColor() + "\n" +
+                        I18n.getString("status") + ": " + v.getState();
                 break;
         }
 
@@ -932,7 +960,7 @@ public class BaseDialogUI {
             }
         });
 
-        JButton cancelButton = createButton("Άκυρο", 360, 320, 140, 40);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 360, 320, 140, 40);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
@@ -960,21 +988,21 @@ public class BaseDialogUI {
 
         switch (type)
         {
-            case ("Χρήστης"):
-                dialogText = "Δεν Βρέθηκαν Χρήστες";
-                labelText = "Δεν Βρέθηκαν Χρήστες";
+            case ("user"):
+                dialogText = I18n.getString("user.notFound.plural");
+                labelText = I18n.getString("user.notFound.plural");
                 break;
-            case ("Πελάτης"):
-                dialogText = "Δεν Βρέθηκαν Πελάτες";
-                labelText = "Δεν Βρέθηκαν Πελάτες";
+            case ("customer"):
+                dialogText = I18n.getString("customer.notFound.plural");
+                labelText = I18n.getString("customer.notFound.plural");
                 break;
-            case ("Όχημα"):
-                dialogText = "Δεν Βρέθηκαν Οχήματα";
-                labelText = "Δεν Βρέθηκαν Οχήματα";
+            case ("vehicle"):
+                dialogText = I18n.getString("vehicle.notFound.plural");
+                labelText = I18n.getString("vehicle.notFound.plural");
                 break;
-            case ("Ιστορικό"):
-                dialogText = "Δεν Βρέθηκε Ιστορικό";
-                labelText = "Δεν Βρέθηκε Ιστορικό";
+            case ("history"):
+                dialogText = I18n.getString("history.notFound");
+                labelText = I18n.getString("history.notFound");
                 break;
         }
         JDialog dialog = createDialog(dialogText, 400, 200);
@@ -1002,12 +1030,12 @@ public class BaseDialogUI {
 
         switch (use) {
             case ("Save"):
-                labelText = "Σφάλμα Στην Αποθήκευση Δεδομένων";
-                dialogText = "Σφάλμα Στην Αποθήκευση Δεδομένων";
+                labelText = I18n.getString("file.save.error");
+                dialogText = I18n.getString("file.save.error");
                 break;
             case ("Load"):
-                labelText = "Σφάλμα Στην Φόρτωση Δεδομένων";
-                dialogText = "Σφάλμα Στην Φόρτωση Δεδομένων";
+                labelText = I18n.getString("file.load.error");
+                dialogText = I18n.getString("file.load.error");
                 break;
         }
 

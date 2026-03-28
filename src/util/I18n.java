@@ -1,5 +1,6 @@
 package util;
 
+import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,5 +21,10 @@ public class I18n
     public static String getString(String key)
     {
         return bundle.getString(key);
+    }
+
+    public static String getString(String key, Object... args)
+    {
+        return MessageFormat.format(bundle.getString(key), args);
     }
 }

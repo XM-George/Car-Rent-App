@@ -148,11 +148,11 @@ public class MainApp implements ActionListener
                 ArrayList<User> u = User.getUsers();
                 BaseDialogUI baseDialog = new BaseDialogUI();
                 if(!u.isEmpty()){
-                    baseDialog.TableSearchResult("Χρήστης", "Search", u);
+                    baseDialog.TableSearchResult("user", "Search", u);
                 }
                 else
                 {
-                    baseDialog.emptyArray("Χρήστης");
+                    baseDialog.emptyArray("user");
                 }
             }
         });
@@ -165,13 +165,13 @@ public class MainApp implements ActionListener
                 CustomerDialogUI customerDialog = new CustomerDialogUI();
                 BaseDialogUI baseDialog = new BaseDialogUI();
                 if(!c.isEmpty()){
-                    int selection = baseDialog.TableSearchResult("Πελάτης", "All", c);
+                    int selection = baseDialog.TableSearchResult("customer", "All", c);
                     if (selection >= 0)
                     {
                         int confirm;
                         if(selection < Customer.getCustomers().size())
                         {
-                            confirm = baseDialog.ConfirmUI(c.get(selection), "Edit", "Πελάτης");
+                            confirm = baseDialog.ConfirmUI(c.get(selection), "Edit", "customer");
                             if (confirm == 1)
                             {
                                 customerDialog.EditCustomerDialog(c.get(selection));
@@ -179,23 +179,23 @@ public class MainApp implements ActionListener
                         }
                         else
                         {
-                            confirm = baseDialog.ConfirmUI(c.get(selection - Customer.getCustomers().size()), "History", "Πελάτης");
+                            confirm = baseDialog.ConfirmUI(c.get(selection - Customer.getCustomers().size()), "History", "customer");
                             if (confirm == 1)
                             {
                                 if(!c.get(selection - Customer.getCustomers().size()).getRents().isEmpty())
                                 {
-                                    baseDialog.TableSearchResult("Ιστορικό", "Search", c.get(selection - Customer.getCustomers().size()).getRents());
+                                    baseDialog.TableSearchResult("history", "Search", c.get(selection - Customer.getCustomers().size()).getRents());
                                 }
                                 else
                                 {
-                                    baseDialog.emptyArray("Ιστορικό");
+                                    baseDialog.emptyArray("history");
                                 }
                             }
                         }
                     }
                 }
                 else{
-                    baseDialog.emptyArray("Πελάτης");
+                    baseDialog.emptyArray("customer");
                 }
             }
         });
@@ -208,13 +208,13 @@ public class MainApp implements ActionListener
                 VehicleDialogUI vehicleDialog = new VehicleDialogUI();
                 BaseDialogUI baseDialog = new BaseDialogUI();
                 if(!v.isEmpty()){
-                    int selection = baseDialog.TableSearchResult("Όχημα", "All", v);
+                    int selection = baseDialog.TableSearchResult("vehicle", "All", v);
                     if (selection >= 0)
                     {
                         int confirm;
                         if(selection < Vehicle.getCars().size())
                         {
-                            confirm = baseDialog.ConfirmUI(v.get(selection), "Edit", "Όχημα");
+                            confirm = baseDialog.ConfirmUI(v.get(selection), "Edit", "vehicle");
                             if (confirm == 1)
                             {
                                 vehicleDialog.EditVehicleDialog(v.get(selection));
@@ -222,23 +222,23 @@ public class MainApp implements ActionListener
                         }
                         else
                         {
-                            confirm = baseDialog.ConfirmUI(v.get(selection - Vehicle.getCars().size()), "History", "Όχημα");
+                            confirm = baseDialog.ConfirmUI(v.get(selection - Vehicle.getCars().size()), "History", "vehicle");
                             if (confirm == 1)
                             {
                                 if(!v.get(selection - Vehicle.getCars().size()).getRents().isEmpty())
                                 {
-                                    baseDialog.TableSearchResult("Ιστορικό",  "Search", v.get(selection - Vehicle.getCars().size()).getRents());
+                                    baseDialog.TableSearchResult("history",  "Search", v.get(selection - Vehicle.getCars().size()).getRents());
                                 }
                                 else
                                 {
-                                    baseDialog.emptyArray("Ιστορικό");
+                                    baseDialog.emptyArray("history");
                                 }
                             }
                         }
                     }
                 }
                 else{
-                    baseDialog.emptyArray("Όχημα");
+                    baseDialog.emptyArray("vehicle");
                 }
             }
         });

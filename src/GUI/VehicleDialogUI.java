@@ -3,6 +3,7 @@ package GUI;
 import API.EntitySearch;
 import API.Vehicle;
 import API.VehicleHelp;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +17,7 @@ import java.util.Objects;
 
 public class VehicleDialogUI extends BaseDialogUI {
     String[] vehicleOptions = {"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
-    String typeOf = "Όχημα";
+    String typeOf = "vehicle";
     String filename = "/icons/carUI.png";
     EntitySearch search = new EntitySearch();
 
@@ -43,7 +44,7 @@ public class VehicleDialogUI extends BaseDialogUI {
                 ArrayList<Vehicle> v = VehicleHelp.SearchVehicles(result);
                 selection = TableSearchResult(typeOf, "Edit", v);
                 if (selection >= 0) {
-                    int confirm = new BaseDialogUI().ConfirmUI(v.get(selection), "Edit", typeOf);
+                    int confirm = ConfirmUI(v.get(selection), "Edit", typeOf);
                     if (confirm == 1) {
                         EditVehicleDialog(v.get(selection));
                     }
@@ -77,16 +78,16 @@ public class VehicleDialogUI extends BaseDialogUI {
                 selection = TableSearchResult(typeOf, "History", v);
                 if (selection >= 0)
                 {
-                    int confirm = new BaseDialogUI().ConfirmUI(v.get(selection), "History", typeOf);
+                    int confirm =ConfirmUI(v.get(selection), "History", typeOf);
                     if(confirm == 1)
                      {
                          if(!v.get(selection).getRents().isEmpty())
                          {
-                             TableSearchResult("Ιστορικό", "Search", v.get(selection).getRents());
+                             TableSearchResult("history", "Search", v.get(selection).getRents());
                          }
                          else
                          {
-                             emptyArray("Ιστορικό");
+                             emptyArray("history");
                          }
                      }
                 }
@@ -168,7 +169,7 @@ public class VehicleDialogUI extends BaseDialogUI {
         });
         dialog.add(editButton);
 
-        JButton cancelButton = createButton("Άκυρο", 290, times * 100, 95, 50);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 290, times * 100, 95, 50);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

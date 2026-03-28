@@ -1,6 +1,7 @@
 package GUI;
 
 import API.*;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class RentDialogUI extends BaseDialogUI
             public void actionPerformed(ActionEvent e)
             {
                 String[] vehicleOptions = {"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
-                String typeOf = "Όχημα";
+                String typeOf = "vehicle";
                 String[] result = UIConstructor(dialogText, typeOf, vehicleOptions, "Find", filename);
                 if (!result[vehicleOptions.length].equals("Cancel"))
                 {
@@ -74,7 +75,7 @@ public class RentDialogUI extends BaseDialogUI
                                             RentError("VehicleRented");
                                             return;
                                         }
-                                        confirm = new BaseDialogUI().ConfirmUI(v.get(selection), "Rent", typeOf);
+                                        confirm = ConfirmUI(v.get(selection), "Rent", typeOf);
                                         if (confirm == 1)
                                         {
                                             vehicleButton.setEnabled(false);
@@ -98,7 +99,7 @@ public class RentDialogUI extends BaseDialogUI
                                             RentError("VehicleAvailable");
                                             return;
                                         }
-                                        confirm = new BaseDialogUI().ConfirmUI(v.get(selection), "Return", typeOf);
+                                        confirm = ConfirmUI(v.get(selection), "Return", typeOf);
                                         if (confirm == 1)
                                         {
                                             dialog.dispose();
@@ -120,7 +121,7 @@ public class RentDialogUI extends BaseDialogUI
 
 
                 String[] customerOptions = {"Όνομα", "Επίθετο", "Email", "Τηλέφωνο", "ΑΦΜ"};
-                String typeOf = "Πελάτης";
+                String typeOf = "customer";
                 String UIConstructorText = "";
                 switch(use)
                 {
@@ -149,7 +150,7 @@ public class RentDialogUI extends BaseDialogUI
                             switch(use)
                             {
                                 case ("Rent"):
-                                    confirm = new BaseDialogUI().ConfirmUI(c.get(selection), "Rent", typeOf);
+                                    confirm = ConfirmUI(c.get(selection), "Rent", typeOf);
                                     if (confirm == 1)
                                     {
                                         customerButton.setEnabled(false);
@@ -179,10 +180,10 @@ public class RentDialogUI extends BaseDialogUI
                                     }
                                     if(flag)
                                     {
-                                        int selectedRent = TableSearchResult("Ιστορικό", "Return", c.get(selection).getActiveRents());
+                                        int selectedRent = TableSearchResult("history", "Return", c.get(selection).getActiveRents());
                                         if(selectedRent >= 0)
                                         {
-                                            confirm = new BaseDialogUI().ConfirmUI(c.get(selection), "Return", typeOf);
+                                            confirm = ConfirmUI(c.get(selection), "Return", typeOf);
                                             if (confirm == 1)
                                             {
                                                 dialog.dispose();
@@ -193,7 +194,7 @@ public class RentDialogUI extends BaseDialogUI
                                     }
                                     else
                                     {
-                                        RentError("Πελάτης");
+                                        RentError("customer");
                                         return;
                                     }
                                     break;
@@ -224,7 +225,7 @@ public class RentDialogUI extends BaseDialogUI
 
         switch (use)
         {
-            case ("Πελάτης"):
+            case ("customer"):
                 rentErrorDialog = createDialog("Δεν Βρέθηκαν Ενοικιασμένα Οχήματα", 500, 200);
                 rentErrorLabel = createLabel("Ο Πελάτης Δεν Έχει Ενοικιασμένα Οχήματα", 20, 40, 460, 40);
                 break;
@@ -352,7 +353,7 @@ public class RentDialogUI extends BaseDialogUI
             }
         });
 
-        JButton cancelButton = createButton("Άκυρο", 400,240,150,40);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 400,240,150,40);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)

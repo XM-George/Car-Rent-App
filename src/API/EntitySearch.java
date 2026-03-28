@@ -68,13 +68,13 @@ public class EntitySearch
 
             switch (type)
             {
-                case "Χρήστης":
+                case "user":
                     searchResult = UserHelp.SearchUsers(a);
                     break;
-                case "Πελάτης":
+                case "customer":
                     searchResult = CustomerHelp.SearchCustomer(a);
                     break;
-                case "Όχημα":
+                case "vehicle":
                     searchResult = VehicleHelp.SearchVehicles(a);
                     break;
             }

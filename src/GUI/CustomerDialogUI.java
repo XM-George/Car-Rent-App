@@ -1,6 +1,7 @@
 package GUI;
 
 import API.*;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +15,7 @@ import java.util.Objects;
 public class CustomerDialogUI extends BaseDialogUI {
 
     String[] customerOptions = {"Όνομα", "Επίθετο", "Τηλέφωνο", "Email", "ΑΦΜ"};
-    String typeOf = "Πελάτης";
+    String typeOf = "customer";
     String filename = "/icons/customerUI.png";
     EntitySearch search = new EntitySearch();
 
@@ -75,16 +76,16 @@ public class CustomerDialogUI extends BaseDialogUI {
                 selection = TableSearchResult(typeOf, "History", c);
                 if (selection >= 0)
                 {
-                    int confirm = new BaseDialogUI().ConfirmUI(c.get(selection), "History", typeOf);
+                    int confirm = ConfirmUI(c.get(selection), "History", typeOf);
                     if(confirm == 1)
                     {
                         if(!c.get(selection).getRents().isEmpty())
                         {
-                            TableSearchResult("Ιστορικό", "Search", c.get(selection).getRents());
+                            TableSearchResult("history", "Search", c.get(selection).getRents());
                         }
                         else
                         {
-                            emptyArray("Ιστορικό");
+                            emptyArray("history");
                         }
                     }
                 }
@@ -150,7 +151,7 @@ public class CustomerDialogUI extends BaseDialogUI {
         });
         dialog.add(editButton);
 
-        JButton cancelButton = createButton("Άκυρο", 290, times * 100, 95, 50);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 290, times * 100, 95, 50);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

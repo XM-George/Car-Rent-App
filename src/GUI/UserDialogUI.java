@@ -15,7 +15,7 @@ public class UserDialogUI extends BaseDialogUI
 {
 
     String[] userOptions = {"Όνομα", "Επίθετο", "Username", "Email", "Password"};
-    String typeOf = "Χρήστης";
+    String typeOf = "user";
     String filename = "/icons/userUI.png";
     EntitySearch search = new EntitySearch();
 
@@ -51,7 +51,7 @@ public class UserDialogUI extends BaseDialogUI
                 selection = TableSearchResult(typeOf, "Delete", u);
                 if(selection >= 0)
                 {
-                    int confirm = new BaseDialogUI().ConfirmUI(u.get(selection), "Delete", typeOf);
+                    int confirm = ConfirmUI(u.get(selection), "Delete", typeOf);
                     if(confirm == 1)
                     {
                         if(!username.equals(u.get(selection).getUsername()))

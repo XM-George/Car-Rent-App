@@ -14,13 +14,13 @@ import java.util.Objects;
 
 public class CustomerDialogUI extends BaseDialogUI {
 
-    String[] customerOptions = {"Όνομα", "Επίθετο", "Τηλέφωνο", "Email", "ΑΦΜ"};
+    String[] customerOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("phone") , I18n.getString("email") , I18n.getString("id")};
     String typeOf = "customer";
     String filename = "/icons/customerUI.png";
     EntitySearch search = new EntitySearch();
 
     public void AddCustomer() {
-        String[] result = UIConstructor("Προσθήκη Πελάτη", typeOf, customerOptions, "Add", filename);
+        String[] result = UIConstructor(I18n.getString("customer.add"), typeOf, customerOptions, "Add", filename);
         if (!result[customerOptions.length].equals("Cancel")) {
             int check = CustomerHelp.checkCustomerDetails(result);
             if (check == -1) {
@@ -31,7 +31,7 @@ public class CustomerDialogUI extends BaseDialogUI {
     }
 
     public void EditCustomerDetails() {
-        String[] result = UIConstructor("Επεξεργασία Πληροφοριών Πελάτη", typeOf, customerOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("customer.edit.info"), typeOf, customerOptions, "Find", filename);
         if (!result[customerOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             int selection;
@@ -52,7 +52,7 @@ public class CustomerDialogUI extends BaseDialogUI {
     }
 
     public void SearchCustomer() {
-        String[] result = UIConstructor("Αναζήτηση Πελάτη", typeOf, customerOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("customer.search"), typeOf, customerOptions, "Find", filename);
         if (!result[customerOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             if (s < 0) {
@@ -65,7 +65,7 @@ public class CustomerDialogUI extends BaseDialogUI {
     }
 
     public void SeeCustomerHistory() {
-        String[] result = UIConstructor("Προβολή Ιστορικού Πελάτη", typeOf, customerOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("customer.history.see"), typeOf, customerOptions, "Find", filename);
         if (!result[customerOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             int selection;
@@ -95,7 +95,7 @@ public class CustomerDialogUI extends BaseDialogUI {
 
     protected void EditCustomerDialog(Customer c) {
         String[] fields = {c.getName(), c.getSurname(), c.getPhone(), c.getEmail(), c.getAfm()};
-        String[] result = EditCustomerUIConstructor("Επεξεργασία Πληροφοριών Πελάτη", customerOptions, filename, fields);
+        String[] result = EditCustomerUIConstructor(I18n.getString("customer.edit.info"), customerOptions, filename, fields);
         if (!result[customerOptions.length].equals("Cancel")) {
             Customer.getCustomerAfm().remove(c.getAfm());
             int check = CustomerHelp.checkCustomerDetails(result);
@@ -138,7 +138,7 @@ public class CustomerDialogUI extends BaseDialogUI {
         }
 
 
-        JButton editButton = createButton("Επεξεργασία Πελάτη", 15, times * 100, 260, 50);
+        JButton editButton = createButton(I18n.getString("customer.edit"), 15, times * 100, 260, 50);
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

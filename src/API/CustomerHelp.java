@@ -31,15 +31,15 @@ public class CustomerHelp {
      *            <li>1 - Επώνυμο</li>
      *            <li>2 - Τηλέφωνο</li>
      *            <li>3 - Email</li>
-     *            <li>4 - ΑΦΜ</li>
+     *            <li>4 - ID</li>
      *          </ul>
      * @return ακέραιος κωδικός που δηλώνει το αποτέλεσμα του ελέγχου:
      *         <ul>
      *           <li>0–4 : Υπάρχει κενό πεδίο (ανάλογα με τη θέση)</li>
      *           <li>5 : Όχι έγκυρο τηλέφωνο</li>
      *           <li>6 : Όχι έγκυρο email</li>
-     *           <li>7 : Υπάρχει ήδη πελάτης με το ίδιο ΑΦΜ</li>
-     *           <li>8 : To ΑΦΜ δεν είναι αριθμός</li>
+     *           <li>7 : Υπάρχει ήδη πελάτης με το ίδιο ID</li>
+     *           <li>8 : To ID δεν είναι αριθμός</li>
      *           <li>-1 : Όλα τα στοιχεία είναι έγκυρα</li>
      *         </ul>
      */
@@ -76,12 +76,12 @@ public class CustomerHelp {
             return 6;
         }
 
-        //Έλεγχος για το αν είναι σωστό το ΑΦΜ
-        //Αν επιστραφεί 7 σημαίνει οτι υπάρχει ήδη αυτό το ΑΦΜ σε άλλο πελάτη
-        //Αν επιστραφεί 8 σημαίνει οτι το ΑΦΜ δεν είναι έγκυρο
+        //Έλεγχος για το αν είναι σωστό το ID
+        //Αν επιστραφεί 7 σημαίνει οτι υπάρχει ήδη αυτό το ID σε άλλο πελάτη
+        //Αν επιστραφεί 8 σημαίνει οτι το ID δεν είναι έγκυρο
 
         check = c[4];
-        if(Customer.getCustomerAfm().contains(check))
+        if(Customer.getCustomerId().contains(check))
         {
             return 7;
         }
@@ -150,7 +150,7 @@ public class CustomerHelp {
      *            <li>1 - Επώνυμο</li>
      *            <li>2 - Τηλέφωνο</li>
      *            <li>3 - Email</li>
-     *            <li>4 - ΑΦΜ</li>
+     *            <li>4 - ID</li>
      *          </ul>
      * @param c ο πελάτης
      * @return το αντίστοιχο στοιχείο του πελάτη ή {@code null}
@@ -172,7 +172,7 @@ public class CustomerHelp {
             case 3:
                 return c.getEmail();
             case 4:
-                return c.getAfm();
+                return c.getId();
         }
         return null;
     }

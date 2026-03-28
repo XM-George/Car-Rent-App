@@ -10,7 +10,7 @@ import java.util.Set;
  * ενοικίασης αυτοκινήτων.
  * <p>
  * Κάθε πελάτης διαθέτει προσωπικά στοιχεία όπως όνομα, επώνυμο,
- * τηλέφωνο, email και ΑΦΜ.
+ * τηλέφωνο, email και ID.
  * </p>
  * <p>
  * Η κλάση υλοποιεί {@link Serializable} ώστε οι πελάτες να μπορούν
@@ -35,8 +35,8 @@ public class Customer implements Serializable {
     /** Email πελάτη */
     String email;
 
-    /** ΑΦΜ πελάτη */
-    String afm;
+    /** ID πελάτη */
+    String id;
 
     /** Λίστα με το Ιστορικό Ενοικιάσεων πελάτη*/
     ArrayList<Rent> rents;
@@ -49,7 +49,7 @@ public class Customer implements Serializable {
      * <p>
      * Δημιουργεί έναν νέο πελάτη χρησιμοποιώντας έναν πίνακα String
      * με τα στοιχεία του πελάτη και τον προσθέτει αυτόματα
-     * στη λίστα πελατών και το ΑΦΜ του στο σύνολο ΑΦΜ.
+     * στη λίστα πελατών και το ID του στο σύνολο ID.
      * Επίσης, αρχικοποιεί τις λίστες με τις ενεργές και όχι ενεργές ενοικιάσεις
      * </p>
      *
@@ -59,7 +59,7 @@ public class Customer implements Serializable {
      *                   <li>1 - Επώνυμο</li>
      *                   <li>2 - Τηλέφωνο</li>
      *                   <li>3 - Email</li>
-     *                   <li>4 - ΑΦΜ</li>
+     *                   <li>4 - ID</li>
      *                 </ul>
      */
     public Customer(String[] elements) {
@@ -67,8 +67,8 @@ public class Customer implements Serializable {
         this.surname = elements[1];
         this.phone = elements[2];
         this.email = elements[3];
-        this.afm = elements[4];
-        getCustomerAfm().add(elements[4]);
+        this.id = elements[4];
+        getCustomerId().add(elements[4]);
         this.addToList();
         rents = new ArrayList<>();
         activeRents = new ArrayList<>();
@@ -111,12 +111,12 @@ public class Customer implements Serializable {
     }
 
     /**
-     * Επιστρέφει το ΑΦΜ του πελάτη.
+     * Επιστρέφει το ID του πελάτη.
      *
-     * @return ΑΦΜ πελάτη
+     * @return ID πελάτη
      */
-    public String getAfm() {
-        return afm;
+    public String getId() {
+        return id;
     }
 
     /**
@@ -156,12 +156,12 @@ public class Customer implements Serializable {
     }
 
     /**
-     * Θέτει το ΑΦΜ του πελάτη.
+     * Θέτει το ID του πελάτη.
      *
-     * @param afm νέο ΑΦΜ
+     * @param id νέο ID
      */
-    public void setAfm(String afm) {
-        this.afm = afm;
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -174,12 +174,12 @@ public class Customer implements Serializable {
     }
 
     /**
-     * Επιστρέφει το σύνολο με όλα τα μοναδικά ΑΦΜ των πελατών.
+     * Επιστρέφει το σύνολο με όλα τα μοναδικά ID των πελατών.
      *
-     * @return σύνολο ΑΦΜ πελατών
+     * @return σύνολο ID πελατών
      */
-    public static Set<String> getCustomerAfm() {
-        return ManageData.getData().getCustomersAfm();
+    public static Set<String> getCustomerId() {
+        return ManageData.getData().getCustomersId();
     }
 
     /**
@@ -216,7 +216,7 @@ public class Customer implements Serializable {
      *            <li>1 - Επώνυμο</li>
      *            <li>2 - Τηλέφωνο</li>
      *            <li>3 - Email</li>
-     *            <li>4 - ΑΦΜ</li>
+     *            <li>4 - ID</li>
      *          </ul>
      */
     public void EditAll(String[] a) {
@@ -224,6 +224,6 @@ public class Customer implements Serializable {
         setSurname(a[1]);
         setPhone(a[2]);
         setEmail(a[3]);
-        setAfm(a[4]);
+        setId(a[4]);
     }
 }

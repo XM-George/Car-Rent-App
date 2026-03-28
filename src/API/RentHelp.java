@@ -1,6 +1,8 @@
 package API;
 
 
+import util.I18n;
+
 /**
  * Η κλάση {@code RentHelp} παρέχει βοηθητικές λειτουργίες
  * που σχετίζονται με τη διαχείριση ενοικιάσεων.
@@ -37,8 +39,8 @@ public class RentHelp
     {
         r.getCustomer().getActiveRents().remove(r);
         r.getVehicle().setActiveRent(null);
-        r.getVehicle().setState("Διαθέσιμο");
-        r.setState("Το Όχημα Επιστράφηκε");
+        r.getVehicle().setState(I18n.getString("vehicle.status.returned"));
+        r.setState(I18n.getString("return.complete"));
     }
 
 }

@@ -99,9 +99,9 @@ public class ManageData
         if (!file.exists())
         {
             data = new CarRentData();
-            readCSV("resources/users.csv","Χρήστης");
-            readCSV("resources/vehicles_with_plates.csv","Όχημα");
-            readCSV("resources/customers.csv", "Πελάτης");
+            readCSV("resources/users.csv","user");
+            readCSV("resources/vehicles_with_plates.csv","vehicle");
+            readCSV("resources/customers.csv", "customer");
             return data;
         }
 
@@ -141,7 +141,7 @@ public class ManageData
 
             br.readLine();
             //noinspection IfCanBeSwitch
-            if(use.equals("Όχημα"))
+            if(use.equals("vehicle"))
             {
                 while ((line = br.readLine()) != null)
                 {
@@ -150,7 +150,7 @@ public class ManageData
                     new Vehicle(values);
                 }
             }
-            else if (use.equals("Χρήστης"))
+            else if (use.equals("user"))
             {
                 while ((line = br.readLine()) != null)
                 {
@@ -159,7 +159,7 @@ public class ManageData
                     new User(values);
                 }
             }
-            else if(use.equals("Πελάτης"))
+            else if(use.equals("customer"))
             {
                 while ((line = br.readLine()) != null)
                 {

@@ -1,5 +1,7 @@
 package API;
 
+import util.I18n;
+
 import java.util.ArrayList;
 
 
@@ -101,7 +103,7 @@ public class VehicleHelp {
         //Αν επιστραφεί 12 σημαίνει οτι το αυτοκίνητο είναι ήδη νοικιασμένο σε πελάτη και δεν μπορεί να αλλάξει σε διαθέσιμο, χρησιμοποιείτε για έλεγχο κατά την επεξεργασία
 
         check = v[7];
-        if(check.equals("Διαθέσιμο"))
+        if(check.equals(I18n.getString("vehicle.status.rented")))
         {
             if(vehicle != null)
             {

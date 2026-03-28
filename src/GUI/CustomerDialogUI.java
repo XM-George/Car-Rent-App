@@ -94,16 +94,16 @@ public class CustomerDialogUI extends BaseDialogUI {
     }
 
     protected void EditCustomerDialog(Customer c) {
-        String[] fields = {c.getName(), c.getSurname(), c.getPhone(), c.getEmail(), c.getAfm()};
+        String[] fields = {c.getName(), c.getSurname(), c.getPhone(), c.getEmail(), c.getId()};
         String[] result = EditCustomerUIConstructor(I18n.getString("customer.edit.info"), customerOptions, filename, fields);
         if (!"Cancel".equals(result[customerOptions.length])) {
-            Customer.getCustomerAfm().remove(c.getAfm());
+            Customer.getCustomerId().remove(c.getId());
             int check = CustomerHelp.checkCustomerDetails(result);
             if (check == -1) {
                 c.EditAll(result);
-                Customer.getCustomerAfm().add(result[4]);
+                Customer.getCustomerId().add(result[4]);
             } else {
-                Customer.getCustomerAfm().add(c.getAfm());
+                Customer.getCustomerId().add(c.getId());
             }
             CheckerUI(check, typeOf, "Edit");
         }

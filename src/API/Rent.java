@@ -1,5 +1,7 @@
 package API;
 
+import util.I18n;
+
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
@@ -74,7 +76,7 @@ public class Rent implements Serializable {
         this.v = v;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
-        this.state = "Ενεργή Ενοικίαση";
+        this.state = I18n.getString("rent.active");
         this.addToList();
         c.getRents().add(this);
         c.getActiveRents().add(this);

@@ -39,8 +39,8 @@ public class CarRentData implements Serializable {
     /** Λίστα όλων των πελατών */
     private ArrayList<Customer> customers = new ArrayList<>();
 
-    /** Σύνολο με όλα τα ΑΦΜ των πελατών (για μοναδικότητα) */
-    private Set<String> customerAfm = new HashSet<>();
+    /** Σύνολο με όλα τα ID των πελατών (για μοναδικότητα) */
+    private Set<String> customerId = new HashSet<>();
 
     /** Λίστα όλων των οχημάτων */
     private ArrayList<Vehicle> cars = new ArrayList<>();
@@ -113,12 +113,12 @@ public class CarRentData implements Serializable {
     }
 
     /**
-     * Επιστρέφει το σύνολο με όλα τα ΑΦΜ των πελατών.
+     * Επιστρέφει το σύνολο με όλα τα ID των πελατών.
      *
-     * @return σύνολο ΑΦΜ πελατών
+     * @return σύνολο ID πελατών
      */
-    protected Set<String> getCustomersAfm() {
-        return customerAfm;
+    protected Set<String> getCustomersId() {
+        return customerId;
     }
 
     /**

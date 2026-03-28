@@ -503,7 +503,7 @@ public class BaseDialogUI {
             case ("customer"):
                 for(Customer c : (ArrayList<Customer>) a)
                 {
-                    Object[] row = {c.getName(), c.getSurname(), Long.parseLong(c.getPhone()), c.getEmail(), Integer.parseInt(c.getAfm())};
+                    Object[] row = {c.getName(), c.getSurname(), Long.parseLong(c.getPhone()), c.getEmail(), Long.parseLong(c.getId())};
                     model.addRow(row);
                 }
                 break;
@@ -517,7 +517,7 @@ public class BaseDialogUI {
             case ("history"):
                 for (Rent r : (ArrayList<Rent>) a)
                 {
-                    Object[] row = {r.getRentId(), r.getUsername(), Long.parseLong(r.getCustomer().getAfm()), Long.parseLong(r.getVehicle().getId()), r.getVehicle().getPlate(),r.getRentDate(), r.getReturnDate(), r.getState()};
+                    Object[] row = {r.getRentId(), r.getUsername(), Long.parseLong(r.getCustomer().getId()), Long.parseLong(r.getVehicle().getId()), r.getVehicle().getPlate(),r.getRentDate(), r.getReturnDate(), r.getState()};
                     model.addRow(row);
                 }
         }
@@ -903,7 +903,7 @@ public class BaseDialogUI {
                         I18n.getString("surname") + ": " + c.getSurname() + "\n" +
                         I18n.getString("phone") + ": " + c.getPhone() + "\n" +
                         I18n.getString("email") + ": " + c.getEmail() + "\n" +
-                        I18n.getString("id") + ": " + c.getAfm();
+                        I18n.getString("id") + ": " + c.getId();
                 break;
             case ("vehicle"):
                 switch(use)

@@ -16,14 +16,14 @@ import java.util.Objects;
 
 
 public class VehicleDialogUI extends BaseDialogUI {
-    String[] vehicleOptions = {"ID", "Πινακίδα", "Μάρκα", "Τύπος", "Μοντέλο", "Έτος", "Χρώμα", "Κατάσταση"};
+    String[] vehicleOptions = {I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") ,I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
     String typeOf = "vehicle";
     String filename = "/icons/carUI.png";
     EntitySearch search = new EntitySearch();
 
     public void AddVehicle() {
 
-        String[] result = UIConstructor("Προσθήκη Οχήματος", typeOf, vehicleOptions, "Add", filename);
+        String[] result = UIConstructor(I18n.getString("vehicle.add"), typeOf, vehicleOptions, "Add", filename);
         if (!result[vehicleOptions.length].equals("Cancel")) {
             int check = VehicleHelp.checkVehicleDetails(result, null);
             if (check == -1) {
@@ -34,7 +34,7 @@ public class VehicleDialogUI extends BaseDialogUI {
     }
 
     public void EditVehicleDetails() {
-        String[] result = UIConstructor("Επεξεργασία Πληροφοριών Οχήματος", typeOf, vehicleOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("vehicle.edit.info"), typeOf, vehicleOptions, "Find", filename);
         if (!result[vehicleOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             int selection;
@@ -54,7 +54,7 @@ public class VehicleDialogUI extends BaseDialogUI {
     }
 
     public void SearchVehicle() {
-        String[] result = UIConstructor("Αναζήτηση Οχήματος", typeOf, vehicleOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("vehicle.search"), typeOf, vehicleOptions, "Find", filename);
         if (!result[vehicleOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             if (s < 0) {
@@ -67,7 +67,7 @@ public class VehicleDialogUI extends BaseDialogUI {
     }
 
     public void SeeVehicleHistory() {
-        String[] result = UIConstructor("Προβολή Ιστορικού Οχήματος", typeOf, vehicleOptions, "Find", filename);
+        String[] result = UIConstructor(I18n.getString("vehicle.history.see"), typeOf, vehicleOptions, "Find", filename);
         if (!result[vehicleOptions.length].equals("Cancel")) {
             int s = search.searchEntity(result, typeOf);
             int selection;
@@ -97,7 +97,7 @@ public class VehicleDialogUI extends BaseDialogUI {
 
     protected void EditVehicleDialog(Vehicle v) {
         String[] fields = {v.getId(), v.getPlate(), v.getBrand(), v.getType(), v.getModel(), v.getYearOfProduction(), v.getColor(), v.getState()};
-        String[] result = EditVehicleUIConstructor("Επεξεργασία Πληροφοριών Οχήματος", vehicleOptions, filename, fields);
+        String[] result = EditVehicleUIConstructor(I18n.getString("vehicle.edit.info"), vehicleOptions, filename, fields);
         if (!result[vehicleOptions.length].equals("Cancel")) {
             Vehicle.getIDs().remove(v.getId());
             Vehicle.getNPs().remove(v.getPlate());
@@ -135,8 +135,8 @@ public class VehicleDialogUI extends BaseDialogUI {
 
             int k = j + 30;
 
-            if (types[i].equals("Κατάσταση")) {
-                String[] a = {"Διαθέσιμο", "Ενοικιασμένο"};
+            if (types[i].equals(I18n.getString("status"))) {
+                String[] a = {I18n.getString("vehicle.status.available") , I18n.getString("vehicle.status.rented")};
                 JComboBox<String> comboBox = createComboBox(a, 50, k, 300, 40);
                 comboBox.setSelectedItem(fields[i]);
                 comboBoxes[i] = comboBox;
@@ -152,12 +152,12 @@ public class VehicleDialogUI extends BaseDialogUI {
         }
 
 
-        JButton editButton = createButton("Επεξεργασία Οχήματος", 15, times * 100, 260, 50);
+        JButton editButton = createButton(I18n.getString("vehicle.edit"), 15, times * 100, 260, 50);
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (int i = 0; i < times; i++) {
-                    if (!types[i].equals("Κατάσταση")) {
+                    if (!types[i].equals(I18n.getString("status"))) {
                         returnValues[i] = textFields[i].getText();
                     } else {
                         returnValues[i] = (String) comboBoxes[i].getSelectedItem();

@@ -3,6 +3,7 @@ package GUI;
 import API.EntitySearch;
 import API.User;
 import API.UserHelp;
+import util.I18n;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,14 +15,14 @@ import java.util.Objects;
 public class UserDialogUI extends BaseDialogUI
 {
 
-    String[] userOptions = {"Όνομα", "Επίθετο", "Username", "Email", "Password"};
+    String[] userOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username") , I18n.getString("password")};
     String typeOf = "user";
     String filename = "/icons/userUI.png";
     EntitySearch search = new EntitySearch();
 
     public void AddUser()
     {
-        String[] result = UIConstructor("Προσθήκη Χρήστη", typeOf, userOptions, "Add", filename);
+        String[] result = UIConstructor(I18n.getString("user.add"), typeOf, userOptions, "Add", filename);
         if(!result[userOptions.length].equals("Cancel"))
         {
             int check = UserHelp.checkUserDetails(result);
@@ -35,8 +36,8 @@ public class UserDialogUI extends BaseDialogUI
 
     public void RemoveUser(String username)
     {
-        String[] userOptions = {"Όνομα", "Επίθετο", "Username", "Email"};
-        String[] result = UIConstructor("Διαγραφή Χρήστη", typeOf, userOptions, "Find", filename);
+        String[] userOptions = {I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username")};
+        String[] result = UIConstructor(I18n.getString("user.delete"), typeOf, userOptions, "Find", filename);
         if(!result[userOptions.length].equals("Cancel"))
         {
             int s = search.searchEntity(result, typeOf);
@@ -85,14 +86,14 @@ public class UserDialogUI extends BaseDialogUI
         {
             case "Success":
                 filename = "/icons/check.png";
-                dialogText = "Ο Χρήστης Διαγράφηκε";
-                labelText = "Η Διαγραφή Ήταν Επιτυχής";
+                dialogText = I18n.getString("user.delete.success");
+                labelText = I18n.getString("delete.success");
                 width = 310;
                 break;
             case "Failed":
                 filename = "/icons/errorNotFound.png";
-                dialogText = "Σφάλμα Κατά Τη Διαγραφή";
-                labelText = "Ο Τρέχων Χρήστης Δεν Μπορεί Να Διαγραφεί";
+                dialogText = I18n.getString("user.delete.error");
+                labelText = I18n.getString("user.current.delete.error");
                 width=490;
                 break;
         }

@@ -18,6 +18,11 @@ public class I18n
         bundle = ResourceBundle.getBundle("messages", locale);
     }
 
+    public static String getCurrentLanguage()
+    {
+        return bundle.getLocale().getLanguage();
+    }
+
     public static String getString(String key)
     {
         return bundle.getString(key);

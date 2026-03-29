@@ -81,7 +81,7 @@ public class Rent implements Serializable {
         c.getRents().add(this);
         c.getActiveRents().add(this);
         v.getRents().add(this);
-        v.setState("Ενοικιασμένο");
+        v.setState(I18n.getString("vehicle.status.rented"));
         v.setActiveRent(this);
     }
 

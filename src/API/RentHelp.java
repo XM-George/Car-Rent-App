@@ -39,7 +39,7 @@ public class RentHelp
     {
         r.getCustomer().getActiveRents().remove(r);
         r.getVehicle().setActiveRent(null);
-        r.getVehicle().setState(I18n.getString("vehicle.status.returned"));
+        r.getVehicle().setState(I18n.getString("vehicle.status.available"));
         r.setState(I18n.getString("return.complete"));
     }
 

@@ -388,7 +388,7 @@ public class BaseDialogUI {
         switch(entity)
         {
             case ("user"):
-                columnNames = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("username")};
+                columnNames = new String[]{I18n.getString("name") , I18n.getString("surname") , I18n.getString("username") , I18n.getString("email")};
                 dialogText = I18n.getString("user.found");
                 break;
             case ("customer"):
@@ -773,10 +773,10 @@ public class BaseDialogUI {
                     break;
                 case "vehicle":
                     itemList = new String[]{I18n.getString("id") , I18n.getString("numberplate") , I18n.getString("make") , I18n.getString("type") , I18n.getString("model") , I18n.getString("year") , I18n.getString("color") , I18n.getString("status")};
+                    String arthro = "";
+                    String kataliksi = "";
                     if (check < itemList.length)
                     {
-                        String arthro;
-                        String kataliksi;
                         if (check == 3)
                         {
                             arthro = "Ο ";
@@ -797,7 +797,7 @@ public class BaseDialogUI {
                     } else if (check == 8)
                     {
                         dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("id")), 500,200);
-                        label = createLabel(I18n.getString("vehicle.error.exists" , "Το" , I18n.getString("id")), 90, 50, 320, 40);
+                        label = createLabel(I18n.getString("vehicle.error.exists.id"), 90, 50, 320, 40);
                     }
                     else if (check == 9)
                     {
@@ -807,7 +807,7 @@ public class BaseDialogUI {
                     else if (check == 10)
                     {
                         dialogCheckerUI = createDialog(I18n.getString("vehicle.error.wrong" , I18n.getString("numberplate")), 500, 200);
-                        label = createLabel(I18n.getString("vehicle.error.exists" , "Η" , I18n.getString("numberplate")), 60, 50, 380, 40);
+                        label = createLabel(I18n.getString("vehicle.error.exists.numberplate"), 60, 50, 380, 40);
                     }
                     else if (check == 11)
                     {

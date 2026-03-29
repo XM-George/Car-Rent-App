@@ -74,7 +74,7 @@ public class Login extends BaseDialogUI
                 else if(check==0)
                 {
                     loginSuccess.setText(I18n.getString("login.password.wrong"));
-                    loginSuccess.setBounds(125,240,150,30);
+                    loginSuccess.setBounds(125,240,180,30);
                     loginSuccess.setForeground(Color.RED);
                     loginSuccess.setVisible(true);
                     password = null;

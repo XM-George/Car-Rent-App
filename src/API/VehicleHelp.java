@@ -103,7 +103,7 @@ public class VehicleHelp {
         //Αν επιστραφεί 12 σημαίνει οτι το αυτοκίνητο είναι ήδη νοικιασμένο σε πελάτη και δεν μπορεί να αλλάξει σε διαθέσιμο, χρησιμοποιείτε για έλεγχο κατά την επεξεργασία
 
         check = v[7];
-        if(check.equals(I18n.getString("vehicle.status.rented")))
+        if(check.equals(I18n.getString("vehicle.status.available")))
         {
             if(vehicle != null)
             {

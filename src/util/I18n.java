@@ -10,7 +10,7 @@ public class I18n
 
     static
     {
-        setLocale(Locale.of("el"));
+        setLocale(Locale.of("en"));
     }
 
     public static void setLocale(Locale locale)

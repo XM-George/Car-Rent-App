@@ -170,7 +170,7 @@ public class VehicleDialogUI extends BaseDialogUI {
         });
         dialog.add(editButton);
 
-        JButton cancelButton = createButton(I18n.getString("cancel"), 290, times * 100, 95, 50);
+        JButton cancelButton = createButton(I18n.getString("cancel"), 290, times * 100, 100, 50);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

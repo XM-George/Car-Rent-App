@@ -1,6 +1,6 @@
 # 🚗 Car Rent App
 A desktop car rental management system built in Java using Swing.
-The application allows managing vehicles, customers, and users, as well as handling rentals with persistent data storage.
+The application allows users to manage vehicles, customers, and system users as well as handling rentals with persistent data storage.
 
 
 ## 📑 Table of Contents
@@ -23,7 +23,8 @@ The application allows managing vehicles, customers, and users, as well as handl
 - Unique rental ID generation
 - Rental history tracking (who rented what and when)
 - Input validation for all entities
-- Full-featured desktop GUI using Java Swing
+- Desktop GUI built using Java Swing
+- Multi-language support (English / Greek) using internationalization (I18n)
 - Persistent storage using binary files (.bin)
 
 
@@ -35,6 +36,7 @@ The application allows managing vehicles, customers, and users, as well as handl
 
 ## 🚀 Usage
 A desktop application for managing all aspects of a car rental business.
+The application is controlled through a menu-driven interface, allowing users to navigate between different management sections (Users, Customers, Vehicles, Rentals).
 
 - Log in using valid user credentials
 - Manage vehicles, customers, and users
@@ -63,7 +65,9 @@ Once the core functionality was stable, I implemented the rental system. This in
 - Generating unique IDs for each rental
 - Storing rental history
 
-Finally, I implemented data persistence using Java serialization. All entities are saved to `.bin` files when the application closes and loaded again when it starts, ensuring data is preserved between sessions.
+I implemented data persistence using Java serialization. All entities are saved to `.bin` files when the application closes and loaded again when it starts, ensuring data is preserved between sessions.
+
+Finally, I added internationalization (I18n) support, allowing the application to switch between English and Greek dynamically through the UI.
 
 Throughout the project, I also documented the code using Javadoc to improve readability and maintainability.
 
@@ -75,6 +79,7 @@ Throughout the project, I also documented the code using Javadoc to improve read
 - Working with object serialization and persistent storage
 - Writing reusable and maintainable code across multiple classes
 - Applying input validation and handling edge cases
+- Designing and implementing internationalization (I18n) for dynamic language switching (English / Greek)
 - Documenting code using Javadoc
 
 
@@ -94,6 +99,7 @@ Throughout the project, I also documented the code using Javadoc to improve read
 - Rental system with relationships between entities
 - Automatic persistence using Java serialization
 - Input validation for safer data handling
+- Internationalization (I18n) support with dynamic language switching
 - Javadoc documentation for maintainability
 
 
@@ -104,14 +110,48 @@ Throughout the project, I also documented the code using Javadoc to improve read
 - The application starts with a login window
 - You must enter a valid username and password to access the system
 - Only registered users (admins) can log in
-- Default is admin for both username and password. (You can later delete that after you made a new user)
+- Default credentials:
+  - Username: `admin`
+  - Password: `admin`
+  (You can delete this user after creating a new one)
+
+---
+
+### 🧭 Navigation Overview
+
+The application is controlled through the top menu bar, which contains the following sections:
+
+- **User**
+  - Add User
+  - Remove User
+  - Sign Out
+
+- **Customer**
+  - Add Customer
+  - Edit Customer
+  - Search Customer
+  - View Customer History
+
+- **Vehicles**
+  - Add Vehicle
+  - Edit Vehicle
+  - Search Vehicle
+  - View Vehicle History
+
+- **Rent**
+  - Rent a Vehicle
+  - Return a Vehicle
+ 
+- **Language**
+  - English
+  - Greek
 
 ---
 
 ### 👤 Users (Admins)
 You can:
 - Add a new user
-- Delete users
+- Remove users
 
 **Requirements:**
 - Name, surname, username, email, password
@@ -125,8 +165,8 @@ You can:
 You can:
 - Add new customers
 - Edit customer information
+- Search customers
 - See customer history
-- Delete customers
 
 **Requirements:**
 - Name, surname, phone, email, ID
@@ -141,8 +181,8 @@ You can:
 You can:
 - Add vehicles
 - Edit vehicle details
+- Search vehicles
 - See vehicle history
-- Delete vehicles
 
 **Requirements:**
 - ID, number plate, make, model, type, year of production, color
@@ -155,7 +195,8 @@ You can:
 
 ### 📅 Rentals
 You can:
-- Rent a vehicle to a customer  
+- Rent a vehicle to a customer
+- Return a vehicle
 - Select rental dates  
 - View rental history  
 
@@ -163,6 +204,14 @@ You can:
 - Each rental gets a unique ID  
 - Rentals are linked to the current user and both customer and vehicle  
 - All rental data is stored and can be viewed later  
+
+---
+
+### 🌐 Language Selection
+- Use the **Language** menu in the top bar to switch between:
+  - English
+  - Greek
+- The interface updates dynamically based on the selected language
 
 ---
 

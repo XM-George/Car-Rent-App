@@ -104,6 +104,7 @@ Throughout the project, I also documented the code using Javadoc to improve read
 - The application starts with a login window
 - You must enter a valid username and password to access the system
 - Only registered users (admins) can log in
+- Default is admin for both username and password. (You can later delete that after you made a new user)
 
 ---
 

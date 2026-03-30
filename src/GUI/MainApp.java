@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class MainApp implements ActionListener
@@ -24,10 +25,11 @@ public class MainApp implements ActionListener
         startMainApp(username);
     }
 
-    JFrame frame = new JFrame();
+    JFrame frame;
 
     protected void startMainApp(String username)
     {
+        frame = new JFrame();
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -66,6 +68,12 @@ public class MainApp implements ActionListener
 
         JMenuItem rentVehicle = new JMenuItem(I18n.getString("vehicle.rent"));
         JMenuItem returnVehicle = new JMenuItem(I18n.getString("vehicle.return"));
+
+        JMenu languageMenu = new JMenu(I18n.getString("language"));
+        JMenu changeLanguage = new JMenu(I18n.getString("language.change"));
+
+        JMenuItem greekLanguage = new JMenuItem(I18n.getString("language.greek"));
+        JMenuItem englishLanguage = new JMenuItem(I18n.getString("language.english"));
 
 
         userMenu.setMnemonic(KeyEvent.VK_U);
@@ -148,11 +156,29 @@ public class MainApp implements ActionListener
         returnVehicle.setActionCommand("RETURN_VEHICLE");
         returnVehicle.addActionListener(this);
 
+        languageMenu.setMnemonic(KeyEvent.VK_L);
+
+        languageMenu.add(changeLanguage);
+        changeLanguage.setMnemonic(KeyEvent.VK_C);
+        changeLanguage.setActionCommand("CHANGE_LANGUAGE");
+        changeLanguage.addActionListener(this);
+
+        changeLanguage.add(greekLanguage);
+        greekLanguage.setMnemonic(KeyEvent.VK_G);
+        greekLanguage.setActionCommand("GREEK_LANGUAGE");
+        greekLanguage.addActionListener(this);
+
+        changeLanguage.add(englishLanguage);
+        englishLanguage.setMnemonic(KeyEvent.VK_E);
+        englishLanguage.setActionCommand("ENGLISH_LANGUAGE");
+        englishLanguage.addActionListener(this);
+
 
         menuBar.add(userMenu);
         menuBar.add(customerMenu);
         menuBar.add(vehicleMenu);
         menuBar.add(rentMenu);
+        menuBar.add(languageMenu);
         frame.setJMenuBar(menuBar);
 
         JButton userButton = buttonForMainApp(I18n.getString("users.show"),"/icons/userUI.png");
@@ -356,6 +382,16 @@ public class MainApp implements ActionListener
                 break;
             case "RETURN_VEHICLE":
                 r.ReturnVehicleUI();
+                break;
+            case "GREEK_LANGUAGE":
+                I18n.setLocale(Locale.of("el"));
+                frame.dispose();
+                new MainApp(username);
+                break;
+            case "ENGLISH_LANGUAGE":
+                I18n.setLocale(Locale.of("en"));
+                frame.dispose();
+                new MainApp(username);
                 break;
         }
 
